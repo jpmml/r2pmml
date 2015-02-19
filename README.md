@@ -15,11 +15,13 @@ This package complements the standard [`pmml` package] (http://cran.r-project.or
 
 # Installation #
 
-This package is not available in [CRAN] (http://cran.r-project.org/) yet. It needs to be installed from a local source checkout.
+This package is not available in [CRAN] (http://cran.r-project.org/) yet.
 
-Installing the package:
+Installing the package from its GitHub repository using the [`devtools` package] (http://cran.r-project.org/web/packages/devtools/):
 ```R
-install.packages("/path/to/r2pmml", repos = NULL, type = "source", verbose = TRUE)
+library("devtools")
+
+install_github(repo = "jpmml/r2pmml")
 ```
 
 This package depends on the following packages:
@@ -45,7 +47,7 @@ print(rf)
 r2pmml(rf, "/tmp/rf.pmml")
 ```
 
-When converting large files, then it may become necessary to increase JVM heap space by declaring the `java.parameters` option. Please note that this option must be declared **before** the `r2pmml` package is loaded:
+When converting large files, then it may become necessary to increase JVM heap space by declaring the `java.parameters` option. Please note that this option must be declared **before** the `r2pmml` package (or any other package that depends on the `rJava` package) is loaded:
 ```R
 options(java.parameters = c("-Xms4G", "-Xmx8G"))
 
