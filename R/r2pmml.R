@@ -2,7 +2,7 @@ r2pmml = function(model, file){
 	tempfile = tempfile("r2pmml-", fileext = ".pb")
 
 	con = file(tempfile, open = "wb")
-	serialize_pb(rf, con)
+	serialize_pb(model, con)
 	close(con)
 
 	converter = .jnew("org/jpmml/converter/Main")
