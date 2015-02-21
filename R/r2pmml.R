@@ -5,10 +5,12 @@ r2pmml = function(model, file){
 	suppressWarnings(serialize_pb(model, con))
 	close(con)
 
-	converter = .jnew("org/jpmml/converter/Main")
-	.jcall(converter, "V", "setInput", .jnew("java/io/File", tempfile))
-	.jcall(converter, "V", "setOutput", .jnew("java/io/File", file))
-	.jcall(converter, "V", "run")
+	tryCatch({.convert(tempfile, file)}, finally = {unlink(tempfile)})
+}
 
-	unlink(tempfile)
+.convert = function(pb_input, pmml_output){
+	converter = .jnew("org/jpmml/converter/Main")
+	.jcall(converter, "V", "setInput", .jnew("java/io/File", pb_input))
+	.jcall(converter, "V", "setOutput", .jnew("java/io/File", pmml_output))
+	.jcall(converter, "V", "run")
 }
