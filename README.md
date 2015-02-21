@@ -49,7 +49,7 @@ r2pmml(rf, "/tmp/rf.pmml")
 
 When converting large files, then it may become necessary to increase JVM heap space by declaring the `java.parameters` option. Please note that this option must be declared **before** the `r2pmml` package (or any other package that depends on the `rJava` package) is loaded:
 ```R
-options(java.parameters = c("-Xms4G", "-Xmx8G"))
+options("java.parameters" = c("-Xms4G", "-Xmx8G"))
 
 library("r2pmml")
 ```
