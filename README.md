@@ -10,10 +10,6 @@ This package complements the standard [`pmml` package] (http://cran.r-project.or
 
 The conversion is handled by the [JPMML-Converter] (https://github.com/jpmml/jpmml-converter) library.
 
-# IMPORTANT #
-
-![](https://github.com/jpmml/r2pmml/blob/master/bulb.png) Are you happy with our solution to your model deployment problem? Please show your support to this exciting technology **by voting** for our Hadoop Summit 2015 talk ["Rapid deployment of predictive models across Big Data platforms"] (https://hadoopsummit.uservoice.com/forums/283261-data-science-and-hadoop/suggestions/7074084). Thank you!
-
 # Prerequisites #
 
 * Java 1.7 or newer. The Java executable must be available on system path.
