@@ -3,7 +3,9 @@ R2PMML
 
 R package for converting R models to PMML
 
-This package complements the standard [`pmml` package] (http://cran.r-project.org/web/packages/pmml/). You should definitely give it a try for the following reasons:
+# Features #
+
+This package complements the standard [`pmml` package] (http://cran.r-project.org/web/packages/pmml/):
 
 * It supports several model types (eg. `gbm`, `train`) that are not supported by the standard `pmml` package.
 * It is extremely fast and memory efficient. For example, it can convert a typical `randomForest` model to a PMML file in a few seconds time, whereas the standard `pmml` package requires several hours to do the same.

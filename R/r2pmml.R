@@ -1,11 +1,9 @@
 r2pmml = function(model, file){
 	tempfile = tempfile("r2pmml-", fileext = ".pb")
 
-	con = file(tempfile, open = "wb")
-	suppressWarnings(serialize_pb(model, con))
-	close(con)
+	saveProtoBuf(model, tempfile)
 
-	tryCatch({.convert(tempfile, file)}, finally = {unlink(tempfile)})
+	tryCatch({ .convert(tempfile, file) }, finally = { unlink(tempfile) })
 }
 
 .convert = function(pb_input, pmml_output){
