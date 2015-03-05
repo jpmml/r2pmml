@@ -1,9 +1,13 @@
-r2pmml = function(model, file){
+r2pmml = function(x, file){
 	tempfile = tempfile("r2pmml-", fileext = ".pb")
 
-	saveProtoBuf(model, tempfile)
+	main = function(){
+		saveProtoBuf(x, tempfile)
 
-	tryCatch({ .convert(tempfile, file) }, finally = { unlink(tempfile) })
+		.convert(tempfile, file)
+	}
+
+	tryCatch({ main() }, finally = { unlink(tempfile) })
 }
 
 .convert = function(pb_input, pmml_output){
