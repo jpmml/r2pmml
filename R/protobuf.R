@@ -1,7 +1,7 @@
 saveProtoBuf = function(x, file){
 	con = file(file, open = "wb")
 
-	tryCatch({ suppressWarnings(serialize_pb(x, con)) }, finally = { close(con) })
+	tryCatch({ serialize_pb(x, con) }, finally = { close(con) })
 }
 
 readProtoBuf = function(file){
