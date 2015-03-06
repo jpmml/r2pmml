@@ -23,8 +23,20 @@ r2pmml = function(x, file, clean = TRUE){
 
 	attributes = attributes(x)
 
-	if(is.environment(x) || is.language(x)){
+	if(is.environment(x) || is.function(x) || is.language(x)){
 		x = format(x)
+	}
+
+	if(isS4(x)){
+		classes = class(x)
+
+		slotNames = slotNames(x)
+		x = lapply(slotNames, function(slotName){ slot(x, slotName) })
+
+		# The 'names' attribute will be (re-)set in the very end of this function
+		attributes = c(attributes, "names" = list(slotNames))
+
+		class(x) = classes
 	}
 
 	if(is.list(x)){
