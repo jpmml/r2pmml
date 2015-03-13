@@ -1,4 +1,4 @@
-r2pmml = function(x, file, clean = TRUE){
+r2pmml = function(x, file, converter = NULL, clean = TRUE){
 
 	if(clean){
 		x = .clean(x)
@@ -9,7 +9,7 @@ r2pmml = function(x, file, clean = TRUE){
 	main = function(){
 		saveProtoBuf(x, tempfile)
 
-		.convert(tempfile, file)
+		.convert(tempfile, file, converter)
 	}
 
 	tryCatch({ main() }, finally = { unlink(tempfile) })
@@ -54,9 +54,15 @@ r2pmml = function(x, file, clean = TRUE){
 	return (x)
 }
 
-.convert = function(pb_input, pmml_output){
-	converter = .jnew("org/jpmml/converter/Main")
-	.jcall(converter, "V", "setInput", .jnew("java/io/File", pb_input))
-	.jcall(converter, "V", "setOutput", .jnew("java/io/File", pmml_output))
-	.jcall(converter, "V", "run")
+.convert = function(pb_input, pmml_output, converter = NULL){
+	main = .jnew("org/jpmml/converter/Main")
+
+	.jcall(main, "V", "setInput", .jnew("java/io/File", pb_input))
+	.jcall(main, "V", "setOutput", .jnew("java/io/File", pmml_output))
+
+	if(!is.null(converter)){
+		.jcall(main, "V", "setConverter", converter)
+	}
+
+	.jcall(main, "V", "run")
 }
