@@ -64,5 +64,7 @@ r2pmml = function(x, file, converter = NULL, clean = TRUE){
 		.jcall(main, "V", "setConverter", converter)
 	}
 
-	.jcall(main, "V", "run")
+	.jcall(main, "V", "run", check = FALSE)
+
+	.jcheck()
 }
