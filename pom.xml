@@ -35,8 +35,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jpmml</groupId>
-			<artifactId>pmml-converter</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>jpmml-r</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -56,8 +56,17 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.jpmml</groupId>
-									<artifactId>pmml-converter</artifactId>
-									<version>1.0-SNAPSHOT</version>
+									<artifactId>jpmml-converter</artifactId>
+									<version>1.0.0</version>
+									<classifier>sources</classifier>
+									<type>jar</type>
+									<outputDirectory>${project.basedir}/java</outputDirectory>
+									<overWrite>true</overWrite>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.jpmml</groupId>
+									<artifactId>jpmml-r</artifactId>
+									<version>1.0.0</version>
 									<classifier>sources</classifier>
 									<type>jar</type>
 									<outputDirectory>${project.basedir}/java</outputDirectory>

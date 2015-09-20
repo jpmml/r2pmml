@@ -55,7 +55,7 @@ r2pmml = function(x, file, converter = NULL, clean = TRUE){
 }
 
 .convert = function(pb_input, pmml_output, converter = NULL){
-	main = .jnew("org/jpmml/converter/Main")
+	main = .jnew("org/jpmml/rexp/Main")
 
 	.jcall(main, "V", "setInput", .jnew("java/io/File", pb_input))
 	.jcall(main, "V", "setOutput", .jnew("java/io/File", pmml_output))
