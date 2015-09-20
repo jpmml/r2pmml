@@ -42,13 +42,13 @@ options("java.parameters" = c("-Xms4G", "-Xmx8G"))
 library("r2pmml")
 ```
 
-The conversion is handled by the newly defined `r2pmml(obj, file)` function:
+The conversion is handled by the newly defined `r2pmml(x, file)` function:
 ```R
 library("randomForest")
 
 data(iris)
 
-rf = randomForest(Species ~ ., data = iris, n.tree = 7)
+rf = randomForest(Species ~ ., data = iris, ntree = 7)
 print(rf)
 
 r2pmml(rf, "/tmp/rf.pmml")
