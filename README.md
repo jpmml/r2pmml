@@ -14,7 +14,6 @@ This package complements the standard [`pmml` package] (http://cran.r-project.or
 
 * R platform:
   * [`rJava` package] (http://cran.r-project.org/web/packages/rJava/)
-  * [`RProtoBuf` package] (http://cran.r-project.org/web/packages/RProtoBuf/)
 * Java 1.7 or newer. The Java executable must be available on system path.
 
 # Installation #
@@ -54,7 +53,7 @@ print(rf)
 r2pmml(rf, "/tmp/rf.pmml")
 ```
 
-# Uninstallation #
+# De-installation #
 
 Removing the package:
 ```R

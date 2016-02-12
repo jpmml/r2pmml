@@ -1,57 +1,13 @@
-r2pmml = function(x, file, converter = NULL, clean = TRUE){
-
-	if(clean){
-		x = .clean(x)
-	}
-
-	tempfile = tempfile("r2pmml-", fileext = ".pb")
+r2pmml = function(x, file, converter = NULL){
+	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
-		saveProtoBuf(x, tempfile)
+		saveRDS(x, tempfile)
 
 		.convert(tempfile, file, converter)
 	}
 
 	tryCatch({ main() }, finally = { unlink(tempfile) })
-}
-
-.clean = function(x){
-
-	if(is.null(x)){
-		return (NULL)
-	}
-
-	attributes = attributes(x)
-
-	if(is.environment(x) || is.function(x) || is.language(x)){
-		x = format(x)
-	}
-
-	if(isS4(x)){
-		classes = class(x)
-
-		slotNames = slotNames(x)
-		x = lapply(slotNames, function(slotName){ slot(x, slotName) })
-
-		# The 'names' attribute will be (re-)set in the very end of this function
-		attributes = c(attributes, "names" = list(slotNames))
-
-		class(x) = classes
-	}
-
-	if(is.list(x)){
-		classes = class(x)
-
-		x = lapply(x, FUN = .clean)
-
-		class(x) = classes
-	}
-
-	if(!is.null(attributes)){
-		attributes(x) = lapply(attributes, FUN = .clean)
-	}
-
-	return (x)
 }
 
 .convert = function(pb_input, pmml_output, converter = NULL){
