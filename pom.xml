@@ -48,34 +48,6 @@
 				<version>2.10</version>
 				<executions>
 					<execution>
-						<id>copy</id>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.jpmml</groupId>
-									<artifactId>jpmml-converter</artifactId>
-									<version>1.0.2</version>
-									<classifier>sources</classifier>
-									<type>jar</type>
-									<outputDirectory>${project.basedir}/java</outputDirectory>
-									<overWrite>true</overWrite>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.jpmml</groupId>
-									<artifactId>jpmml-r</artifactId>
-									<version>1.1.0</version>
-									<classifier>sources</classifier>
-									<type>jar</type>
-									<outputDirectory>${project.basedir}/java</outputDirectory>
-									<overWrite>true</overWrite>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-					<execution>
 						<id>copy-dependencies</id>
 						<goals>
 							<goal>copy-dependencies</goal>
