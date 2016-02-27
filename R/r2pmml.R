@@ -1,4 +1,14 @@
-r2pmml = function(x, file, converter = NULL){
+r2pmml = function(x, ...){
+	UseMethod("r2pmml")
+}
+
+r2pmml.xgb.Booster = function(x, fmap, file, converter = NULL){
+	x$fmap = fmap
+
+	r2pmml.default(x, file, converter)
+}
+
+r2pmml.default = function(x, file, converter = NULL){
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
