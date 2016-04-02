@@ -27,12 +27,14 @@ install_github(repo = "jpmml/r2pmml")
 
 # Usage #
 
+### Base functionality
+
 Loading the package:
 ```R
 library("r2pmml")
 ```
 
-The conversion is handled by the newly defined `r2pmml(x, file)` function:
+The conversion is handled by the `r2pmml(x, file, ...)` function:
 ```R
 library("randomForest")
 
@@ -44,8 +46,16 @@ print(rf)
 r2pmml(rf, "rf.pmml")
 ```
 
-It is possible to tweak JVM configuration by setting the `java.parameters` option.
-For example, setting initial and maximum heap sizes to 4 GB and 8 GB, respectively, which should be sufficient for handling even the largest model objects:
+Upon invocation, the `r2pmml` function launches a new Java process using the [`system2`] (https://stat.ethz.ch/R-manual/R-devel/library/base/html/system2.html) function, and waits for it to finish.
+
+### Advanced functionality
+
+Employing a custom converter class:
+```R
+r2pmml(rf, "rf.pmml", converter = "com.mycompany.MyRandomForestConverter", converter_classpath = "/path/to/myconverter-1.0-SNAPSHOT.jar")
+```
+
+Tweaking JVM configuration by setting the `java.parameters` option:
 ```R
 options("java.parameters" = c("-Xms4G", "-Xmx8G"))
 ```

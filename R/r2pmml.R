@@ -2,19 +2,19 @@ r2pmml = function(x, ...){
 	UseMethod("r2pmml")
 }
 
-r2pmml.xgb.Booster = function(x, fmap, file, converter = NULL){
+r2pmml.xgb.Booster = function(x, fmap, file, ...){
 	x$fmap = fmap
 
-	r2pmml.default(x, file, converter)
+	r2pmml.default(x, file, ...)
 }
 
-r2pmml.default = function(x, file, converter = NULL){
+r2pmml.default = function(x, file, ...){
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
 		saveRDS(x, tempfile)
 
-		.convert(tempfile, file, converter)
+		.convert(tempfile, file, ...)
 	}
 
 	tryCatch({ main() }, finally = { unlink(tempfile) })
@@ -32,8 +32,19 @@ r2pmml.default = function(x, file, converter = NULL){
 	return (paste(jar_files, collapse = .Platform$path.sep))
 }
 
-.convert = function(rds_input, pmml_output, converter = NULL){
-	args = c(getOption("java.parameters", default = character()), "-cp", .classpath(), "org.jpmml.rexp.Main", "--rds-input", rds_input, "--pmml-output", pmml_output)
+.convert = function(rds_input, pmml_output, converter = NULL, converter_classpath = NULL){
+	classpath = .classpath()
+
+	if(!is.null(converter) && !is.null(converter_classpath)){
+
+		if(length(converter_classpath) > 1){
+			converter_classpath = paste(converter_classpath, collapse = .Platform$path.sep)
+		}
+
+		classpath = paste(classpath, converter_classpath, sep = .Platform$path.sep)
+	}
+
+	args = c(getOption("java.parameters", default = character()), "-cp", classpath, "org.jpmml.rexp.Main", "--rds-input", rds_input, "--pmml-output", pmml_output)
 
 	if(!is.null(converter)){
 		args = c(args, "--converter", converter)
