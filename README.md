@@ -50,14 +50,16 @@ Upon invocation, the `r2pmml` function launches a new Java process using the [`s
 
 ### Advanced functionality
 
+Tweaking JVM configuration:
+```R
+Sys.setenv(JAVA_TOOL_OPTIONS = "-Xms4G -Xmx8G")
+
+r2pmml(rf, "rf.pmml")
+```
+
 Employing a custom converter class:
 ```R
 r2pmml(rf, "rf.pmml", converter = "com.mycompany.MyRandomForestConverter", converter_classpath = "/path/to/myconverter-1.0-SNAPSHOT.jar")
-```
-
-Tweaking JVM configuration by setting the `java.parameters` option:
-```R
-options("java.parameters" = c("-Xms4G", "-Xmx8G"))
 ```
 
 # De-installation #
