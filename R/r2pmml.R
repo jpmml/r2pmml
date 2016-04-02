@@ -20,17 +20,27 @@ r2pmml.default = function(x, file, converter = NULL){
 	tryCatch({ main() }, finally = { unlink(tempfile) })
 }
 
-.convert = function(pb_input, pmml_output, converter = NULL){
-	main = .jnew("org/jpmml/rexp/Main")
+.classpath = function(){
+	pkgs = installed.packages()
 
-	.jcall(main, "V", "setInput", .jnew("java/io/File", pb_input))
-	.jcall(main, "V", "setOutput", .jnew("java/io/File", pmml_output))
+	pkg.r2pmml = pkgs["r2pmml", ]
+
+	java_dir = file.path(pkg.r2pmml["LibPath"], pkg.r2pmml["Package"], "java", fsep = .Platform$file.sep)
+
+	jar_files = list.files(path = java_dir, pattern = "*.jar", full.names = TRUE)
+
+	return (paste(jar_files, collapse = .Platform$path.sep))
+}
+
+.convert = function(rds_input, pmml_output, converter = NULL){
+	args = c(getOption("java.parameters", default = character()), "-cp", .classpath(), "org.jpmml.rexp.Main", "--rds-input", rds_input, "--pmml-output", pmml_output)
 
 	if(!is.null(converter)){
-		.jcall(main, "V", "setConverter", converter)
+		args = c(args, "--converter", converter)
 	}
 
-	.jcall(main, "V", "run", check = FALSE)
-
-	.jcheck()
+	result = system2("java", args)
+	if(result != 0){
+		stop(result)
+	}
 }

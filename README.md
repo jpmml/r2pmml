@@ -7,18 +7,16 @@ R package for converting R models to PMML
 
 This package complements the standard [`pmml` package] (http://cran.r-project.org/web/packages/pmml/):
 
-* It supports several model types (eg. `gbm`, `train`) that are not supported by the standard `pmml` package.
+* It supports several model types (eg. `gbm`, `iForest`, `xgb.Booster`) that are not supported by the standard `pmml` package.
 * It is extremely fast and memory efficient. For example, it can convert a typical `randomForest` model to a PMML file in a few seconds time, whereas the standard `pmml` package requires several hours to do the same.
 
 # Prerequisites #
 
-* R platform:
-  * [`rJava` package] (http://cran.r-project.org/web/packages/rJava/)
 * Java 1.7 or newer. The Java executable must be available on system path.
 
 # Installation #
 
-This package is not available in the [CRAN package repository] (http://cran.r-project.org/) yet.
+This package is not yet available in the [CRAN package repository] (http://cran.r-project.org/).
 
 Installing the package from its GitHub repository using the [`devtools` package] (http://cran.r-project.org/web/packages/devtools/):
 ```R
@@ -34,13 +32,6 @@ Loading the package:
 library("r2pmml")
 ```
 
-When converting large files, then it may become necessary to increase JVM heap space by declaring the `java.parameters` option. Please note that this option must be declared **before** the `r2pmml` package (or any other package that depends on the `rJava` package) is loaded:
-```R
-options("java.parameters" = c("-Xms4G", "-Xmx8G"))
-
-library("r2pmml")
-```
-
 The conversion is handled by the newly defined `r2pmml(x, file)` function:
 ```R
 library("randomForest")
@@ -50,7 +41,13 @@ data(iris)
 rf = randomForest(Species ~ ., data = iris, ntree = 7)
 print(rf)
 
-r2pmml(rf, "/tmp/rf.pmml")
+r2pmml(rf, "rf.pmml")
+```
+
+It is possible to tweak JVM configuration by setting the `java.parameters` option.
+For example, setting initial and maximum heap sizes to 4 GB and 8 GB, respectively, which should be sufficient for handling even the largest model objects:
+```R
+options("java.parameters" = c("-Xms4G", "-Xmx8G"))
 ```
 
 # De-installation #
