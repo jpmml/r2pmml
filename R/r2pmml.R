@@ -32,7 +32,7 @@ r2pmml.default = function(x, file, ...){
 	return (paste(jar_files, collapse = .Platform$path.sep))
 }
 
-.convert = function(rds_input, pmml_output, converter = NULL, converter_classpath = NULL){
+.convert = function(rds_input, pmml_output, converter = NULL, converter_classpath = NULL, verbose = FALSE){
 	classpath = .classpath()
 
 	if(!is.null(converter) && !is.null(converter_classpath)){
@@ -48,6 +48,10 @@ r2pmml.default = function(x, file, ...){
 
 	if(!is.null(converter)){
 		args = c(args, "--converter", converter)
+	}
+
+	if(verbose){
+		print(paste("java", paste(args, collapse = " "), sep = " "))
 	}
 
 	result = system2("java", args)
