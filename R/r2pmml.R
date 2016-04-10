@@ -44,7 +44,7 @@ r2pmml.default = function(x, file, ...){
 		classpath = paste(classpath, converter_classpath, sep = .Platform$path.sep)
 	}
 
-	args = c("-cp", classpath, "org.jpmml.rexp.Main", "--rds-input", rds_input, "--pmml-output", pmml_output)
+	args = c("-cp", shQuote(classpath), "org.jpmml.rexp.Main", "--rds-input", shQuote(rds_input), "--pmml-output", shQuote(pmml_output))
 
 	if(!is.null(converter)){
 		args = c(args, "--converter", converter)
