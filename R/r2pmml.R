@@ -2,13 +2,24 @@ r2pmml = function(x, ...){
 	UseMethod("r2pmml")
 }
 
+r2pmml.ranger = function(x, variable.levels, file, ...){
+	x$variable.levels = variable.levels
+
+	r2pmml.default(x, file, ...)
+}
+
 r2pmml.xgb.Booster = function(x, fmap, file, ...){
 	x$fmap = fmap
 
 	r2pmml.default(x, file, ...)
 }
 
-r2pmml.default = function(x, file, ...){
+r2pmml.default = function(x, file, preProcess = NULL, ...){
+
+	if(!is.null(preProcess)){
+		x$preProcess = preProcess
+	}
+
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
