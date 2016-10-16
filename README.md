@@ -74,6 +74,42 @@ print(iris.rf)
 r2pmml(iris.rf, preProcess = iris.preProcess, "iris_rf.pmml")
 ```
 
+### Model formulae
+
+Alternatively, it is possible to associate `lm` and `glm` models with data pre-processing transformations via [model formulae] (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
+
+Supported model formula features:
+
+* Interaction terms.
+* `I(..)` expression terms:
+   * The `if` expression.
+   * Logical operators `&`, `|` and `!`.
+   * Relational operators `==`, `!=`, `<`, `<=`, `>=` and `>`.
+   * Arithmetic operators: `+`, `-`, `/` and `*`.
+   * Exponentiation operators `^` and `**`.
+   * The `is.na` function.
+   * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
+
+Training and exporting a `glm` model:
+```R
+library("r2pmml")
+
+auto = read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data", quote = "\"", header = FALSE, na.strings = "?", row.names = NULL, col.names = c("mpg", "cylinders", "displacement", "horsepower", "weight", "acceleration", "model_year", "origin", "car_name"))
+auto$origin = as.factor(auto$origin)
+auto$car_name = NULL
+
+# Remove NA rows
+auto = na.omit(auto)
+
+# Train a model.
+# Use the `(..)^2` construct to define main effects for all features together with their second-order interactions.
+# Use the `I(..)` construct to define two new features
+auto.glm = glm(mpg ~ (.) ^ 2 + I(displacement / cylinders) + I(log(weight)), data = auto)
+
+# Export the model to PMML
+r2pmml(auto.glm, "auto_glm.pmml")
+```
+
 ### Package `ranger`
 
 Training and exporting a `ranger` model:
