@@ -32,7 +32,7 @@ r2pmml.xgb.Booster = function(x, fmap, file, response_name = NA, response_levels
 	r2pmml.default(x, file, ...)
 }
 
-r2pmml.default = function(x, file, preProcess = NULL, ...){
+r2pmml.default = function(x, file, dataset = NULL, preProcess = NULL, ...){
 
 	if(!is.null(preProcess)){
 		x$preProcess = preProcess
