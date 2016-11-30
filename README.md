@@ -95,16 +95,13 @@ Training and exporting a `glm` model:
 ```R
 library("r2pmml")
 
+# Load and prepare the Auto-MPG dataset
 auto = read.table("http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data", quote = "\"", header = FALSE, na.strings = "?", row.names = NULL, col.names = c("mpg", "cylinders", "displacement", "horsepower", "weight", "acceleration", "model_year", "origin", "car_name"))
 auto$origin = as.factor(auto$origin)
 auto$car_name = NULL
-
-# Remove NA rows
 auto = na.omit(auto)
 
-# Train a model.
-# Use the `(..)^2` construct to define main effects for all features together with their second-order interactions.
-# Use the `I(..)` construct to define two new features
+# Train a model
 auto.glm = glm(mpg ~ (. - horsepower - weight) ^ 2 + I(displacement / cylinders) + cut(horsepower, breaks = c(0, 50, 100, 150, 200, 250)) + I(log(weight)), data = auto)
 
 # Export the model to PMML
