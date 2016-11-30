@@ -85,10 +85,11 @@ Supported model formula features:
    * The `if` expression.
    * Logical operators `&`, `|` and `!`.
    * Relational operators `==`, `!=`, `<`, `<=`, `>=` and `>`.
-   * Arithmetic operators: `+`, `-`, `/` and `*`.
+   * Arithmetic operators `+`, `-`, `/` and `*`.
    * Exponentiation operators `^` and `**`.
    * The `is.na` function.
    * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
+* `cut()` function terms.
 
 Training and exporting a `glm` model:
 ```R
@@ -104,7 +105,7 @@ auto = na.omit(auto)
 # Train a model.
 # Use the `(..)^2` construct to define main effects for all features together with their second-order interactions.
 # Use the `I(..)` construct to define two new features
-auto.glm = glm(mpg ~ (.) ^ 2 + I(displacement / cylinders) + I(log(weight)), data = auto)
+auto.glm = glm(mpg ~ (. - horsepower - weight) ^ 2 + I(displacement / cylinders) + cut(horsepower, breaks = c(0, 50, 100, 150, 200, 250)) + I(log(weight)), data = auto)
 
 # Export the model to PMML
 r2pmml(auto.glm, "auto_glm.pmml")
