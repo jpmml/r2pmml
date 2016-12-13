@@ -76,7 +76,7 @@ r2pmml(iris.rf, preProcess = iris.preProcess, "iris_rf.pmml")
 
 ### Model formulae
 
-Alternatively, it is possible to associate `lm` and `glm` models with data pre-processing transformations via [model formulae] (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
+Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models with data pre-processing transformations via [model formulae] (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
 
 Supported model formula features:
 
@@ -89,10 +89,12 @@ Supported model formula features:
    * Exponentiation operators `^` and `**`.
    * The `is.na` function.
    * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
-* `cut()` function terms.
+* `base::cut()` function terms.
+* `plyr::revalue()` and `plyr::mapvalues()` function terms.
 
 Training and exporting a `glm` model:
 ```R
+library("plyr")
 library("r2pmml")
 
 # Load and prepare the Auto-MPG dataset
@@ -102,7 +104,7 @@ auto$car_name = NULL
 auto = na.omit(auto)
 
 # Train a model
-auto.glm = glm(mpg ~ (. - horsepower - weight) ^ 2 + I(displacement / cylinders) + cut(horsepower, breaks = c(0, 50, 100, 150, 200, 250)) + I(log(weight)), data = auto)
+auto.glm = glm(mpg ~ (. - horsepower - weight - origin) ^ 2 + I(displacement / cylinders) + cut(horsepower, breaks = c(0, 50, 100, 150, 200, 250)) + I(log(weight)) + revalue(origin, replace = c("1" = "US", "2" = "Europe", "3" = "Japan")), data = auto)
 
 # Export the model to PMML
 r2pmml(auto.glm, "auto_glm.pmml")
