@@ -138,24 +138,23 @@ library("r2pmml")
 
 data(iris)
 
-iris_x = iris[, 1:4]
+iris_X = iris[, 1:4]
 iris_y = as.integer(iris[, 5]) - 1
 
-# Train a model
-iris.xgb = xgboost(data = as.matrix(iris_x), label = iris_y, missing = NA, objective = "multi:softmax", num_class = 3, nrounds = 13)
+# Generate XGBoost feature map
+iris.fmap = genFMap(iris_X)
 
-# Create a feature map
-iris.fmap = data.frame(
-	"id" = seq(from = 0, (to = ncol(iris_x) - 1)),
-	"name" = names(iris_x),
-	"type" = rep("q", ncol(iris_x))
-)
+# Generate XGBoost DMatrix
+iris.DMatrix = genDMatrix(iris_y, iris_X)
+
+# Train a model
+iris.xgb = xgboost(data = iris.DMatrix, missing = NULL, objective = "multi:softmax", num_class = 3, nrounds = 13)
 
 # Export the model to PMML.
 # Pass the feature map as the `fmap` argument.
 # Pass the name and category levels of the target field as `response_name` and `response_levels` arguments, respectively.
 # Pass the value of missing value as the `missing` argument
-r2pmml(iris.xgb, fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NA, "iris_xgb.pmml")
+r2pmml(iris.xgb, fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NULL, "iris_xgb.pmml")
 ```
 
 ### Advanced functionality

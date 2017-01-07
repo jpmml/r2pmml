@@ -1,6 +1,15 @@
 library("xgboost")
 
-genFMap = function(df_X, file){
+#' Generates an XGBoost feature map based on feature data.
+#'
+#' @param df_X A "data.frame" object with independent variables.
+#'
+#' @return A "data.frame" object.
+#'
+#' @examples
+#' data(iris)
+#' iris.fmap = genFMap(iris[, 1:4])
+genFMap = function(df_X){
 	col2name = function(x){
 		col = df_X[[x]]
 		if(is.factor(col)){
@@ -18,12 +27,26 @@ genFMap = function(df_X, file){
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
 
-	write.table(fmap, file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
-
 	return (fmap)
 }
 
-genDMatrix = function(df_y, df_X, file){
+#' Writes XGBoost feature map to a file.
+writeFMap = function(fmap, file){
+	write.table(fmap, file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
+}
+
+#' Generates an XGBoost "DMatrix" object based on label and feature data.
+#'
+#' @param df_y A vector with dependent variable values.
+#' @param df_X A "data.frame" object with independent variable values.
+#' @param file A filesystem path for storing the temporary LibSVM data format file.
+#'
+#' @return An "xgb.DMatrix" object.
+#'
+#' @examples
+#' data(iris)
+#' iris.DMatrix = genDMatrix(as.integer(iris[, 5]) - 1, iris[, 1:4])
+genDMatrix = function(df_y, df_X, file = tempfile(pattern = "DMatrix", fileext = ".libsvm")){
 	col2len = function(x){
 		col = df_X[[x]]
 		if(is.factor(col)){

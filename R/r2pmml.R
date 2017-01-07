@@ -8,12 +8,12 @@ r2pmml.ranger = function(x, variable.levels, file, ...){
 	r2pmml.default(x, file, ...)
 }
 
-r2pmml.xgb.Booster = function(x, fmap, file, response_name = NA, response_levels = c(), missing = NA, ...){
+r2pmml.xgb.Booster = function(x, fmap, file, response_name = NULL, response_levels = c(), missing = NULL, ...){
 	x$fmap = fmap
 
 	schema = list()
 
-	if(!is.na(response_name)){
+	if(!is.null(response_name)){
 		schema$response_name = response_name
 	}
 
@@ -21,7 +21,7 @@ r2pmml.xgb.Booster = function(x, fmap, file, response_name = NA, response_levels
 		schema$response_levels = response_levels
 	}
 
-	if(!is.na(missing)){
+	if(!is.null(missing)){
 		schema$missing = missing
 	}
 

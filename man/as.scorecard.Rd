@@ -2,7 +2,7 @@
 % Please edit documentation in R/scorecard.R
 \name{as.scorecard}
 \alias{as.scorecard}
-\title{Converts a "glm" object to "scorecard" object.}
+\title{Converts a "glm" object to a "scorecard" object.}
 \usage{
 as.scorecard(glm, odds = 10, base_points = 500, pdo = 100)
 }
@@ -19,6 +19,6 @@ as.scorecard(glm, odds = 10, base_points = 500, pdo = 100)
 A "scorecard" object.
 }
 \description{
-Converts a "glm" object to "scorecard" object.
+Converts a "glm" object to a "scorecard" object.
 }
 
