@@ -81,15 +81,14 @@ Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models
 Supported model formula features:
 
 * Interaction terms.
-* `I(..)` expression terms:
-   * The `if` expression.
+* `base::I(..)` function terms:
    * Logical operators `&`, `|` and `!`.
    * Relational operators `==`, `!=`, `<`, `<=`, `>=` and `>`.
    * Arithmetic operators `+`, `-`, `/` and `*`.
    * Exponentiation operators `^` and `**`.
    * The `is.na` function.
    * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
-* `base::cut()` function terms.
+* `base::cut()` and `base::ifelse()` function terms.
 * `plyr::revalue()` and `plyr::mapvalues()` function terms.
 
 Training and exporting a `glm` model:
