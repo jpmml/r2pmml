@@ -2,6 +2,24 @@ r2pmml = function(x, ...){
 	UseMethod("r2pmml")
 }
 
+r2pmml.earth = function(x, file, dataset, ...){
+
+	if(is.null(x$xlevels)){
+		x$xlevels = stats:::.getXlevels(x$terms, dataset)
+	}
+
+	r2pmml.default(x, file, dataset = dataset, ...)
+}
+
+r2pmml.svm.formula = function(x, file, dataset, ...){
+
+	if(is.null(x$xlevels)){
+		x$xlevels = stats:::.getXlevels(x$terms, dataset)
+	}
+
+	r2pmml.default(x, file, dataset = dataset, ...)
+}
+
 r2pmml.ranger = function(x, variable.levels, file, ...){
 	x$variable.levels = variable.levels
 
