@@ -20,13 +20,13 @@ r2pmml.svm.formula = function(x, file, dataset, ...){
 	r2pmml.default(x, file, dataset = dataset, ...)
 }
 
-r2pmml.ranger = function(x, variable.levels, file, ...){
+r2pmml.ranger = function(x, file, variable.levels, ...){
 	x$variable.levels = variable.levels
 
 	r2pmml.default(x, file, ...)
 }
 
-r2pmml.xgb.Booster = function(x, fmap, file, response_name = NULL, response_levels = c(), missing = NULL, ...){
+r2pmml.xgb.Booster = function(x, file, fmap, response_name = NULL, response_levels = c(), missing = NULL, ...){
 	x$fmap = fmap
 
 	schema = list()

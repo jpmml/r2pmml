@@ -71,7 +71,7 @@ print(iris.rf)
 
 # Export the model to PMML.
 # Pass the preprocessor as the `preProcess` argument
-r2pmml(iris.rf, preProcess = iris.preProcess, "iris_rf.pmml")
+r2pmml(iris.rf, "iris_rf.pmml", preProcess = iris.preProcess)
 ```
 
 ### Model formulae
@@ -125,7 +125,7 @@ print(iris.ranger)
 
 # Export the model to PMML.
 # Pass the levels of all factor variables as the `variable.levels` argument
-r2pmml(iris.ranger, variable.levels = sapply(iris, levels), "iris_ranger.pmml")
+r2pmml(iris.ranger, "iris_ranger.pmml", variable.levels = sapply(iris, levels))
 ```
 
 ### Package `xgboost`
@@ -153,7 +153,7 @@ iris.xgb = xgboost(data = iris.DMatrix, missing = NULL, objective = "multi:softm
 # Pass the feature map as the `fmap` argument.
 # Pass the name and category levels of the target field as `response_name` and `response_levels` arguments, respectively.
 # Pass the value of missing value as the `missing` argument
-r2pmml(iris.xgb, fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NULL, "iris_xgb.pmml")
+r2pmml(iris.xgb, "iris_xgb.pmml", fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NULL)
 ```
 
 ### Advanced functionality
