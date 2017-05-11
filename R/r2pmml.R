@@ -1,67 +1,12 @@
-r2pmml = function(x, ...){
-	UseMethod("r2pmml")
-}
-
-r2pmml.earth = function(x, file, dataset, ...){
-
-	if(is.null(x$xlevels)){
-		x$xlevels = stats:::.getXlevels(x$terms, dataset)
-	}
-
-	r2pmml.default(x, file, dataset = dataset, ...)
-}
-
-r2pmml.svm.formula = function(x, file, dataset, ...){
-
-	if(is.null(x$xlevels)){
-		x$xlevels = stats:::.getXlevels(x$terms, dataset)
-	}
-
-	r2pmml.default(x, file, dataset = dataset, ...)
-}
-
-r2pmml.ranger = function(x, file, variable.levels, ...){
-	x$variable.levels = variable.levels
-
-	r2pmml.default(x, file, ...)
-}
-
-r2pmml.xgb.Booster = function(x, file, fmap, response_name = NULL, response_levels = c(), missing = NULL, ...){
-	x$fmap = fmap
-
-	schema = list()
-
-	if(!is.null(response_name)){
-		schema$response_name = response_name
-	}
-
-	if(length(response_levels) > 0){
-		schema$response_levels = response_levels
-	}
-
-	if(!is.null(missing)){
-		schema$missing = missing
-	}
-
-	if(length(schema) > 0){
-		x$schema = schema
-	}
-
-	r2pmml.default(x, file, ...)
-}
-
-r2pmml.default = function(x, file, dataset = NULL, preProcess = NULL, ...){
-
-	if(!is.null(preProcess)){
-		x$preProcess = preProcess
-	}
+r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
+	x = decorate(x, ...)
 
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
 		saveRDS(x, tempfile)
 
-		.convert(tempfile, file, ...)
+		.convert(tempfile, file, converter, converter_classpath, verbose)
 	}
 
 	tryCatch({ main() }, finally = { unlink(tempfile) })
