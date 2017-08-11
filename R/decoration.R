@@ -20,8 +20,11 @@ decorate.svm.formula = function(x, dataset, ...){
 	decorate.default(x, ...)
 }
 
-decorate.ranger = function(x, variable.levels, ...){
-	x$variable.levels = variable.levels
+decorate.ranger = function(x, dataset, ...){
+
+	if(is.null(x$variable.levels)){
+		x$variable.levels = .getFactorLevels(dataset)
+	}
 
 	decorate.default(x, ...)
 }

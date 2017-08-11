@@ -124,8 +124,8 @@ iris.ranger = ranger(Species ~ ., data = iris, num.trees = 7, write.forest = TRU
 print(iris.ranger)
 
 # Export the model to PMML.
-# Pass the levels of all factor variables as the `variable.levels` argument
-r2pmml(iris.ranger, "iris_ranger.pmml", variable.levels = sapply(iris, levels))
+# Pass the training dataset as the `dataset` argument
+r2pmml(iris.ranger, "iris_ranger.pmml", dataset = iris)
 ```
 
 ### Package `xgboost`
