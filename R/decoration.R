@@ -11,19 +11,19 @@ decorate.earth = function(x, dataset, ...){
 	decorate.default(x, ...)
 }
 
-decorate.svm.formula = function(x, dataset, ...){
+decorate.ranger = function(x, dataset, ...){
 
-	if(is.null(x$xlevels)){
-		x$xlevels = .getFactorLevels(dataset)
+	if(is.null(x$variable.levels)){
+		x$variable.levels = .getFactorLevels(dataset)
 	}
 
 	decorate.default(x, ...)
 }
 
-decorate.ranger = function(x, dataset, ...){
+decorate.svm.formula = function(x, dataset, ...){
 
-	if(is.null(x$variable.levels)){
-		x$variable.levels = .getFactorLevels(dataset)
+	if(is.null(x$xlevels)){
+		x$xlevels = .getFactorLevels(dataset)
 	}
 
 	decorate.default(x, ...)
