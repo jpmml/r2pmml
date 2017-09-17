@@ -33,7 +33,7 @@ decorate.train = function(x, ...){
 	decorate(x$finalModel, preProcess = NULL, ...)
 }
 
-decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ...){
+decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
 	x$fmap = fmap
 
 	schema = list()
@@ -52,6 +52,14 @@ decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels =
 
 	if(length(schema) > 0){
 		x$schema = schema
+	}
+
+	if(is.null(x$ntreelimit)){
+		x$ntreelimit = ntreelimit
+	}
+
+	if(is.null(x$compact)){
+		x$compact = compact
 	}
 
 	decorate.default(x, ...)
