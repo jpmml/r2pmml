@@ -153,7 +153,8 @@ iris.xgb = xgboost(data = iris.DMatrix, missing = NULL, objective = "multi:softm
 # Pass the feature map as the `fmap` argument.
 # Pass the name and category levels of the target field as `response_name` and `response_levels` arguments, respectively.
 # Pass the value of missing value as the `missing` argument
-r2pmml(iris.xgb, "iris_xgb.pmml", fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NULL)
+# Pass the optimal number of trees as the `ntreelimit` argument (analogous to the `ntreelimit` argument of the `xgb::predict.xgb.Booster` function)
+r2pmml(iris.xgb, "iris_xgb.pmml", fmap = iris.fmap, response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"), missing = NULL, ntreelimit = 7, compact = TRUE)
 ```
 
 ### Advanced functionality
