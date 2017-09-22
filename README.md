@@ -5,7 +5,7 @@ R package for converting R models to PMML
 
 # Features #
 
-This package complements the standard [`pmml` package] (http://cran.r-project.org/web/packages/pmml/):
+This package complements the standard [`pmml` package](http://cran.r-project.org/web/packages/pmml/):
 
 * It supports several model types (eg. `gbm`, `iForest`, `ranger`, `xgb.Booster`) that are not supported by the standard `pmml` package.
 * It is extremely fast and memory efficient. For example, it can convert a typical `randomForest` model to a PMML file in a few seconds time, whereas the standard `pmml` package requires several hours to do the same.
@@ -16,11 +16,11 @@ This package complements the standard [`pmml` package] (http://cran.r-project.or
 
 # Installation #
 
-Installing the package from its GitHub repository using the [`devtools` package] (http://cran.r-project.org/web/packages/devtools/):
+Installing the package from its GitHub repository using the [`devtools` package](http://cran.r-project.org/web/packages/devtools/):
 ```R
 library("devtools")
 
-install_github(repo = "jpmml/r2pmml")
+install_git("git://github.com/jpmml/r2pmml.git")
 ```
 
 # Usage #
@@ -76,7 +76,7 @@ r2pmml(iris.rf, "iris_rf.pmml", preProcess = iris.preProcess)
 
 ### Model formulae
 
-Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models with data pre-processing transformations via [model formulae] (https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
+Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models with data pre-processing transformations via [model formulae](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
 
 Supported model formula features:
 
@@ -180,8 +180,8 @@ remove.packages("r2pmml")
 
 # License #
 
-R2PMML is licensed under the [GNU Affero General Public License (AGPL) version 3.0] (http://www.gnu.org/licenses/agpl-3.0.html). Other licenses are available on request.
+R2PMML is licensed under the [GNU Affero General Public License (AGPL) version 3.0](http://www.gnu.org/licenses/agpl-3.0.html). Other licenses are available on request.
 
 # Additional information #
 
-Please contact [info@openscoring.io] (mailto:info@openscoring.io)
+Please contact [info@openscoring.io](mailto:info@openscoring.io)
