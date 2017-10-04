@@ -11,6 +11,18 @@ decorate.earth = function(x, dataset, ...){
 	decorate.default(x, ...)
 }
 
+decorate.elmNN = function(x, dataset, ...){
+
+	if(is.null(x$model)){
+		x$model = model.frame(x$formula, data = dataset)
+
+		mmat = model.matrix(x$model, data = x$model)
+		attr(attr(x$model, "terms"), "columns") = colnames(mmat)
+	}
+
+	decorate.default(x, ...)
+}
+
 decorate.ranger = function(x, dataset, ...){
 
 	if(is.null(x$variable.levels)){
