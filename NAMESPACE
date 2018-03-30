@@ -1,1 +1,4 @@
+importFrom("stats", "model.frame", "model.matrix", "na.omit")
+importFrom("utils", "installed.packages", "write.table")
+
 exportPattern("^[^\\.]")

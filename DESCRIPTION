@@ -13,3 +13,5 @@ URL: https://github.com/jpmml/r2pmml
 LazyLoad: yes
 NeedsCompilation: no
 RoxygenNote: 5.0.1
+Suggests:
+    xgboost

@@ -1,5 +1,3 @@
-library("xgboost")
-
 #' Generates an XGBoost feature map based on feature data.
 #'
 #' @param df_X A "data.frame" object with independent variables.
@@ -91,5 +89,5 @@ genDMatrix = function(df_y, df_X, file = tempfile(pattern = "DMatrix", fileext =
 
 	close(fp)
 
-	return (xgb.DMatrix(file))
+	return (xgboost::xgb.DMatrix(file))
 }
