@@ -2,19 +2,19 @@ decorate = function(x, ...){
 	UseMethod("decorate")
 }
 
-decorate.earth = function(x, dataset, ...){
+decorate.earth = function(x, data, ...){
 
 	if(is.null(x$xlevels)){
-		x$xlevels = .getFactorLevels(dataset)
+		x$xlevels = .getFactorLevels(data)
 	}
 
 	decorate.default(x, ...)
 }
 
-decorate.elmNN = function(x, dataset, ...){
+decorate.elmNN = function(x, data, ...){
 
 	if(is.null(x$model)){
-		x$model = model.frame(x$formula, data = dataset)
+		x$model = model.frame(x$formula, data = data)
 
 		mmat = model.matrix(x$model, data = x$model)
 		attr(attr(x$model, "terms"), "columns") = colnames(mmat)
@@ -23,19 +23,19 @@ decorate.elmNN = function(x, dataset, ...){
 	decorate.default(x, ...)
 }
 
-decorate.ranger = function(x, dataset, ...){
+decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
-		x$variable.levels = .getFactorLevels(dataset)
+		x$variable.levels = .getFactorLevels(data)
 	}
 
 	decorate.default(x, ...)
 }
 
-decorate.svm.formula = function(x, dataset, ...){
+decorate.svm.formula = function(x, data, ...){
 
 	if(is.null(x$xlevels)){
-		x$xlevels = .getFactorLevels(dataset)
+		x$xlevels = .getFactorLevels(data)
 	}
 
 	decorate.default(x, ...)
@@ -86,8 +86,8 @@ decorate.default = function(x, preProcess = NULL){
 	return (x)
 }
 
-.getFactorLevels = function(dataset){
-	levels = lapply(dataset, function(x){ if(is.factor(x)) { levels(x) } else { NULL }})
+.getFactorLevels = function(data){
+	levels = lapply(data, function(x){ if(is.factor(x)) { levels(x) } else { NULL }})
 
 	return (levels[!vapply(levels, is.null, NA)])
 }

@@ -39,7 +39,7 @@ library("r2pmml")
 
 data(iris)
 
-# Train a model using raw Iris data
+# Train a model using raw Iris dataset
 iris.rf = randomForest(Species ~ ., data = iris, ntree = 7)
 print(iris.rf)
 
@@ -62,10 +62,10 @@ data(iris)
 # Create a preprocessor
 iris.preProcess = preProcess(iris, method = c("range"))
 
-# Use the preprocessor to transform raw Iris data to pre-processed Iris data
+# Use the preprocessor to transform raw Iris dataset to pre-processed Iris dataset
 iris.transformed = predict(iris.preProcess, newdata = iris)
 
-# Train a model using pre-processed Iris data
+# Train a model using pre-processed Iris dataset
 iris.rf = randomForest(Species ~., data = iris.transformed, ntree = 7)
 print(iris.rf)
 
@@ -124,8 +124,8 @@ iris.ranger = ranger(Species ~ ., data = iris, num.trees = 7, write.forest = TRU
 print(iris.ranger)
 
 # Export the model to PMML.
-# Pass the training dataset as the `dataset` argument
-r2pmml(iris.ranger, "iris_ranger.pmml", dataset = iris)
+# Pass the training dataset as the `data` argument
+r2pmml(iris.ranger, "iris_ranger.pmml", data = iris)
 ```
 
 ### Package `xgboost`
