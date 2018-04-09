@@ -171,6 +171,10 @@ Employing a custom converter class:
 r2pmml(iris.rf, "iris_rf.pmml", converter = "com.mycompany.MyRandomForestConverter", converter_classpath = "/path/to/myconverter-1.0-SNAPSHOT.jar")
 ```
 
+Please refer to the following resources for more ideas and code examples:
+
+* [Converting R to PMML](https://www.slideshare.net/VilluRuusmann/converting-r-to-pmml-82182483)
+
 # De-installation #
 
 Removing the package:
@@ -180,8 +184,10 @@ remove.packages("r2pmml")
 
 # License #
 
-R2PMML is licensed under the [GNU Affero General Public License (AGPL) version 3.0](http://www.gnu.org/licenses/agpl-3.0.html). Other licenses are available on request.
+R2PMML is dual-licensed under the [GNU Affero General Public License (AGPL) version 3.0](http://www.gnu.org/licenses/agpl-3.0.html), and a commercial license.
 
 # Additional information #
 
-Please contact [info@openscoring.io](mailto:info@openscoring.io)
+R2PMML is developed and maintained by Openscoring Ltd, Estonia.
+
+Openscoring Ltd offers a wide variety of [products and services](https://openscoring.io/#products-list) in the field of applied predictive analytics. Please subscribe to Opensoring Ltd [newsletter](https://openscoring.io/#newsletter) for periodic updates about JPMML and Openscoring software projects.
