@@ -23,6 +23,12 @@ decorate.elmNN = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
+decorate.glmnet = function(x, lambda.s, data, ...){
+	x$lambda.s = lambda.s
+
+	decorate.default(x, ...)
+}
+
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
