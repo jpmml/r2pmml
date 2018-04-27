@@ -29,6 +29,12 @@ decorate.glmnet = function(x, lambda.s, data, ...){
 	decorate.default(x, ...)
 }
 
+decorate.party = function(x, data, ...){
+	x$scores = predict_party(x, id = 1:length(x))
+
+	decorate.default(x, ...)
+}
+
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
