@@ -35,6 +35,15 @@ decorate.party = function(x, ...){
 	decorate.default(x, ...)
 }
 
+decorate.randomForest = function(x, compact = FALSE, ...){
+
+	if(is.null(x$compact)){
+		x$compact = compact
+	}
+
+	decorate.default(x, ...)
+}
+
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
