@@ -36,12 +36,7 @@ decorate.party = function(x, ...){
 }
 
 decorate.randomForest = function(x, compact = FALSE, ...){
-
-	if(is.null(x$compact)){
-		x$compact = compact
-	}
-
-	decorate.default(x, ...)
+	decorate.default(x, pmml_options = list(compact = compact), ...)
 }
 
 decorate.ranger = function(x, data, ...){
@@ -91,17 +86,17 @@ decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels =
 		x$ntreelimit = ntreelimit
 	}
 
-	if(is.null(x$compact)){
-		x$compact = compact
-	}
-
-	decorate.default(x, ...)
+	decorate.default(x, pmml_options = list(compact = compact), ...)
 }
 
-decorate.default = function(x, preProcess = NULL){
+decorate.default = function(x, preProcess = NULL, pmml_options = NULL){
 
 	if(!is.null(preProcess)){
 		x$preProcess = preProcess
+	}
+
+	if(!is.null(pmml_options)){
+		x$pmml_options = pmml_options
 	}
 
 	return (x)
