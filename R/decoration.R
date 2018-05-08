@@ -58,7 +58,9 @@ decorate.svm.formula = function(x, data, ...){
 }
 
 decorate.train = function(x, ...){
-	decorate(x$finalModel, preProcess = NULL, ...)
+	x$finalModel = decorate(x$finalModel, preProcess = NULL, ...)
+
+	return (x)
 }
 
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
