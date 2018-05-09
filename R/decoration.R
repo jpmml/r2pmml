@@ -30,7 +30,17 @@ decorate.glmnet = function(x, lambda.s, ...){
 }
 
 decorate.party = function(x, ...){
-	x$scores = predict_party(x, id = 1:length(x))
+	ids = 1:length(x)
+
+	predicted = list()
+
+	predicted$"(response)" = predict_party(x, id = ids, type = "response")
+	
+	if(is.factor(predicted$"(response)")){
+		predicted$"(prob)" = predict_party(x, id = ids, type = "prob")
+	}
+
+	x$predicted = predicted
 
 	decorate.default(x, ...)
 }
