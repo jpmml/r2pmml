@@ -2,6 +2,38 @@ verify = function(x, newdata, ...){
 	UseMethod("verify")
 }
 
+verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
+	active_values = newdata
+
+	familyFamily = x$family$family
+
+	target_values = NULL
+
+	output_values = NULL
+
+	if(familyFamily == "binomial"){
+		responseIndex = attr(x$terms, "response")
+		responseLevels = levels(x$model[[responseIndex]])
+
+		response = predict(x, newdata = active_values, type = "response")
+
+		prob = data.frame("0" = (1 - response), "1" = (response), check.names = FALSE)
+		names(prob) = paste("probability(", responseLevels, ")", sep = "")
+
+		output_values = prob
+	} else
+
+	{
+		link = predict(x, newdata = active_values)
+
+		target_values = data.frame(NULL = link)
+	}
+
+	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
+
+	return (x)
+}
+
 verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
 	ignore = function(cond){
 	}
