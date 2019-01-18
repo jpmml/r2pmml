@@ -5,8 +5,9 @@ R package for converting R models to PMML
 
 # Features #
 
-This package complements the standard [`pmml` package](http://cran.r-project.org/web/packages/pmml/):
+This package supersedes the standard [`pmml` package](https://cran.r-project.org/package=pmml):
 
+* It produces valid and standards-compliant PMML markup.
 * It supports several model types (eg. `gbm`, `iForest`, `ranger`, `xgb.Booster`) that are not supported by the standard `pmml` package.
 * It is extremely fast and memory efficient. For example, it can convert a typical `randomForest` model to a PMML file in a few seconds time, whereas the standard `pmml` package requires several hours to do the same.
 
@@ -16,7 +17,7 @@ This package complements the standard [`pmml` package](http://cran.r-project.org
 
 # Installation #
 
-Installing the package from its GitHub repository using the [`devtools` package](http://cran.r-project.org/web/packages/devtools/):
+Installing the package from its GitHub repository using the [`devtools` package](https://cran.r-project.org/package=devtools):
 ```R
 library("devtools")
 
@@ -184,7 +185,7 @@ remove.packages("r2pmml")
 
 # License #
 
-R2PMML is dual-licensed under the [GNU Affero General Public License (AGPL) version 3.0](http://www.gnu.org/licenses/agpl-3.0.html), and a commercial license.
+R2PMML is dual-licensed under the [GNU Affero General Public License (AGPL) version 3.0](https://www.gnu.org/licenses/agpl-3.0.html), and a commercial license.
 
 # Additional information #
 
