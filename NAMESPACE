@@ -1,4 +1,4 @@
-importFrom("stats", "model.frame", "model.matrix", "na.omit")
+importFrom("stats", "model.frame", "model.matrix", "na.omit", "predict")
 importFrom("utils", "installed.packages", "write.table")
 
 exportPattern("^[^\\.]")

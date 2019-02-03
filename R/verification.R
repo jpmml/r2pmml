@@ -1,8 +1,19 @@
+#' Dispatches execution to the most appropriate model verification function.
+#'
+#' @param x A model object.
+#' @param newdata The verification dataset.
+#' @param ... Arguments to pass on to the selected function.
 verify = function(x, newdata, ...){
-	UseMethod("verify")
+	NextMethod("verify")
 }
 
-verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
+#' Enhances a "glm" object with verification data.
+#'
+#' @param x A "glm" object.
+#' @param newdata The verification dataset.
+#' @param precision Maximal relative error.
+#' @param zeroThreshold Maximal absolute error near the zero value.
+verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13){
 	active_values = newdata
 
 	familyFamily = x$family$family
@@ -34,6 +45,13 @@ verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...)
 	return (x)
 }
 
+#' Enhances a "train" object with verification data.
+#'
+#' @param x A "train" object.
+#' @param newdata The verification dataset.
+#' @param precision Maximal relative error.
+#' @param zeroThreshold Maximal absolute error near the zero value.
+#' @param ... Arguments to pass on to the "predict.train" method.
 verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
 	ignore = function(cond){
 	}
@@ -58,6 +76,10 @@ verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ..
 	return (x)
 }
 
+#' Enhances a model object with verification data.
+#'
+#' @param x A model object.
+#' @param newdata The verification dataset.
 verify.default = function(x, newdata){
 	stop(paste("Verification is not implemented for", class(x)[[1]], sep = " "))
 }

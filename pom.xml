@@ -37,6 +37,12 @@
 			<groupId>org.jpmml</groupId>
 			<artifactId>jpmml-r</artifactId>
 			<version>1.3.11</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jpmml</groupId>
+					<artifactId>pmml-agent</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 

@@ -6,7 +6,11 @@
 \usage{
 writeFMap(fmap, file)
 }
+\arguments{
+\item{fmap}{An XGBoost feature map as a "data.frame" object.}
+
+\item{file}{A filesystem path to the result file.}
+}
 \description{
 Writes XGBoost feature map to a file.
 }
-

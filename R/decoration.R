@@ -1,7 +1,16 @@
+#' Dispatches execution to the most appropriate model decoration function.
+#'
+#' @param x A model object.
+#' @param ... Arguments to pass on to the selected function.
 decorate = function(x, ...){
-	UseMethod("decorate")
+	NextMethod("decorate")
 }
 
+#' Decorates an "earth" object with an "xlevels" element.
+#'
+#' @param x An "earth" object.
+#' @param data The training dataset.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.earth = function(x, data, ...){
 
 	if(is.null(x$xlevels)){
@@ -11,6 +20,11 @@ decorate.earth = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
+#' Decorates an "elmNN" object with a "model" element.
+#'
+#' @param x An "elmNN" object.
+#' @param data The training dataset.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.elmNN = function(x, data, ...){
 
 	if(is.null(x$model)){
@@ -23,21 +37,30 @@ decorate.elmNN = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
+#' Decorates a "glmnet" object with a "lambda.s" element.
+#'
+#' @param x A "glmnet" object.
+#' @param lambda.s The best lambda value. Must be one of listed "glmnet$lambda" values.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.glmnet = function(x, lambda.s, ...){
 	x$lambda.s = lambda.s
 
 	decorate.default(x, ...)
 }
 
+#' Decorates a "party" object with a "predicted" element.
+#'
+#' @param x A "party" object.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.party = function(x, ...){
 	ids = 1:length(x)
 
 	predicted = list()
 
-	predicted$"(response)" = predict_party(x, id = ids, type = "response")
+	predicted$"(response)" = partykit::predict_party(x, id = ids, type = "response")
 	
 	if(is.factor(predicted$"(response)")){
-		predicted$"(prob)" = predict_party(x, id = ids, type = "prob")
+		predicted$"(prob)" = partykit::predict_party(x, id = ids, type = "prob")
 	}
 
 	x$predicted = predicted
@@ -45,10 +68,20 @@ decorate.party = function(x, ...){
 	decorate.default(x, ...)
 }
 
+#' Decorates a "randomForest" object with PMML conversion options.
+#'
+#' @param x A "randomForest" object.
+#' @param compact A flag controlling if decision trees should be transformed from binary splits (FALSE) to multi-way splits (TRUE) representation.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.randomForest = function(x, compact = FALSE, ...){
 	decorate.default(x, pmml_options = list(compact = compact), ...)
 }
 
+#' Decorates a "ranger" object with a "variable.levels" element.
+#'
+#' @param x A "ranger" object.
+#' @param data The training dataset.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
@@ -58,6 +91,11 @@ decorate.ranger = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
+#' Decorates a "svm.formula" object with an "xlevels" element.
+#'
+#' @param x A "svm.formula" object.
+#' @param data The training dataset.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.svm.formula = function(x, data, ...){
 
 	if(is.null(x$xlevels)){
@@ -67,12 +105,26 @@ decorate.svm.formula = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
+#' Decorates the final model of a "train" object with model type-dependent elements.
+#'
+#' @param x A "train" object.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.train = function(x, ...){
 	x$finalModel = decorate(x$finalModel, preProcess = NULL, ...)
 
 	return (x)
 }
 
+#' Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.
+#'
+#' @param x An "xgb.Booster" object.
+#' @param fmap An XGBoost feature map as a "data.frame" object.
+#' @param response_name The name of the target field.
+#' @param response_levels A list of category values for a categorical target field.
+#' @param missing The string representation of missing input field values.
+#' @param ntreelimit The number of decision trees (aka boosting rounds) to convert.
+#' @param compact A flag controlling if decision trees should be transformed from binary splits (FALSE) to multi-way splits (TRUE) representation.
+#' @param ... Arguments to pass on to the "decorate.default" function.
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
 	x$fmap = fmap
 
@@ -101,6 +153,11 @@ decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels =
 	decorate.default(x, pmml_options = list(compact = compact), ...)
 }
 
+#' Decorates a model object with "preProcess" and "pmml_options" elements.
+#'
+#' @param x The model object.
+#' @param preProcess A "train::preProcess" object.
+#' @param pmml_options A list of model type-dependent PMML conversion options.
 decorate.default = function(x, preProcess = NULL, pmml_options = NULL){
 
 	if(!is.null(preProcess)){

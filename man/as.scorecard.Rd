@@ -21,4 +21,3 @@ A "scorecard" object.
 \description{
 Converts a "glm" object to a "scorecard" object.
 }
-

@@ -24,4 +24,3 @@ Generates an XGBoost "DMatrix" object based on label and feature data.
 data(iris)
 iris.DMatrix = genDMatrix(as.integer(iris[, 5]) - 1, iris[, 1:4])
 }
-

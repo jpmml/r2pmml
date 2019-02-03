@@ -1,3 +1,11 @@
+#' Converts an R model object to PMML.
+#'
+#' @param x An R model object.
+#' @param file A filesystem path to the result file.
+#' @param converter The name of a custom JPMML-R converter class.
+#' @param converter_classpath A list of filesystem paths to library JAR files that provide and support the custom JPMML-R converter class.
+#' @param verbose A flag controlling the verbosity of the conversion process.
+#' @param ... Arguments to be passed on to the "r2pmml::decorate" function.
 r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
 	x = decorate(x, ...)
 

@@ -19,4 +19,3 @@ Generates an XGBoost feature map based on feature data.
 data(iris)
 iris.fmap = genFMap(iris[, 1:4])
 }
-
