@@ -3,10 +3,9 @@ Version: 0.21.0
 Date: 2019-02-03
 Type: Package
 License: AGPL-3
-Title: Fast Conversion of R Models to PMML
-Description: This package provides R wrapper function(s) for
-    the JPMML-R library (https://github.com/jpmml/jpmml-r),
-    which implements fast conversion of R models to PMML.
+Title: Convert R Models to PMML
+Description: R wrapper for the JPMML-R library <https://github.com/jpmml/jpmml-r>, 
+    which converts R models to PMML.
 Author: Villu Ruusmann <villu.ruusmann@gmail.com>
 Maintainer: Villu Ruusmann <villu.ruusmann@gmail.com>
 URL: https://github.com/jpmml/r2pmml

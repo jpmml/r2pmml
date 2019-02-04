@@ -1,3 +1,4 @@
 ^\.git$
+^cran-comments\.md$
 ^LICENSE\.txt$
 ^pom\.xml$
