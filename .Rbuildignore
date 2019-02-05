@@ -2,3 +2,4 @@
 ^cran-comments\.md$
 ^LICENSE\.txt$
 ^pom\.xml$
+^target$
