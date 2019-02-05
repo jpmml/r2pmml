@@ -54,7 +54,19 @@
 				<version>2.10</version>
 				<executions>
 					<execution>
-						<id>copy-dependencies</id>
+						<id>copy-library-sources</id>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<classifier>sources</classifier>
+							<excludeArtifactIds>pmml-model,pmml-model-metro</excludeArtifactIds>
+							<includeGroupIds>org.jpmml</includeGroupIds>
+							<outputDirectory>${project.basedir}/java</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-libraries</id>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
