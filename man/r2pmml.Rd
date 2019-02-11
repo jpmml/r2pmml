@@ -23,3 +23,22 @@ r2pmml(x, file, converter = NULL, converter_classpath = NULL,
 \description{
 Converts an R model object to PMML.
 }
+\examples{
+library("mlbench")
+library("randomForest")
+library("r2pmml")
+
+data(iris)
+iris.rf = randomForest(Species ~ ., data = iris, ntree = 7)
+# Convert "randomForest" object to R-style (deep binary splits) MiningModel
+r2pmml(iris.rf, "Iris-MiningModel.pmml")
+# Convert "randomForest" object to PMML-style (shallow multi-way splits) MiningModel
+r2pmml(iris.rf, "Iris-MiningModel-compact.pmml", compact = TRUE)
+
+data(BostonHousing)
+housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
+# Convert "glm" object into GeneralRegressionModel
+r2pmml(housing.glm, "Housing-GeneralRegressionModel.pmml")
+# Convert "glm" object into RegressionModel
+r2pmml(housing.glm, "Housing-RegressionModel.pmml", converter = "org.jpmml.rexp.LMConverter")
+}
