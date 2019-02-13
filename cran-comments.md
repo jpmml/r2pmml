@@ -1,5 +1,7 @@
 ## Test environments
+* Local GNU/Linux install, R 3.3.1
 * Local GNU/Linux install, R 3.4.4
+* Local GNU/Linux install, R 3.5.2
 * Win-builder (devel and release)
 
 ## R CMD check results
