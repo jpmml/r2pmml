@@ -16,6 +16,7 @@ Suggests:
     caret,
     e1071,
     earth,
+    evtree,
     glmnet,
     mlbench,
     partykit,

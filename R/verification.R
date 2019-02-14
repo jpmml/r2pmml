@@ -13,6 +13,15 @@ verify = function(x, newdata, ...){
 #' @param newdata The verification dataset.
 #' @param precision Maximal relative error.
 #' @param zeroThreshold Maximal absolute error near the zero value.
+#'
+#' @examples
+#' library("mlbench")
+#' library("r2pmml")
+#'
+#' data(BostonHousing)
+#' housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
+#' housing.glm = verify(housing.glm, newdata = BostonHousing[sample(nrow(BostonHousing), 10), ])
+#' r2pmml(housing.glm, "Housing-GLM-verified.pmml")
 verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13){
 	active_values = newdata
 

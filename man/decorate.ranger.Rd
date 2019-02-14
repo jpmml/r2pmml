@@ -16,3 +16,12 @@ decorate.ranger(x, data, ...)
 \description{
 Decorates a "ranger" object with a "variable.levels" element.
 }
+\examples{
+library("ranger")
+library("r2pmml")
+
+data(iris)
+iris.ranger = ranger(Species ~ ., data = iris, write.forest = TRUE, probability = TRUE)
+iris.ranger = decorate(iris.ranger, data = iris)
+r2pmml(iris.ranger, "Iris-Ranger.pmml")
+}

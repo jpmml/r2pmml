@@ -28,3 +28,21 @@ decorate.xgb.Booster(x, fmap, response_name = NULL,
 \description{
 Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.
 }
+\examples{
+library("xgboost")
+library("r2pmml")
+
+data(iris)
+iris_x = iris[, -ncol(iris)]
+iris_y = iris[, ncol(iris)]
+# Convert from factor to integer[0, num_class]
+iris_y = (as.integer(iris_y) - 1)
+iris.fmap = genFMap(iris_x)
+iris.dmatrix = genDMatrix(iris_y, iris_x)
+iris.xgboost = xgboost(data = iris.dmatrix, 
+    objective = "multi:softprob", num_class = 3, nrounds = 11)
+iris.xgboost = decorate(iris.xgboost, iris.fmap, 
+    response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
+r2pmml(iris.xgboost, "Iris-XGBoost.pmml", compact = FALSE)
+r2pmml(iris.xgboost, "Iris-XGBoost-compact.pmml", compact = TRUE)
+}

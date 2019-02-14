@@ -42,8 +42,22 @@ decorate.elmNN = function(x, data, ...){
 #' @param x A "glmnet" object.
 #' @param lambda.s The best lambda value. Must be one of listed "glmnet$lambda" values.
 #' @param ... Arguments to pass on to the "decorate.default" function.
+#'
+#' @examples
+#' library("glmnet")
+#' library("r2pmml")
+#'
+#' data(iris)
+#' iris_x = as.matrix(iris[, -ncol(iris)])
+#' iris_y = iris[, ncol(iris)]
+#' iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
+#' iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
+#' r2pmml(iris.glmnet, "Iris-GLMNet.pmml")
 decorate.glmnet = function(x, lambda.s, ...){
-	x$lambda.s = lambda.s
+
+	if(is.null(x$lambda.s)){
+		x$lambda.s = lambda.s
+	}
 
 	decorate.default(x, ...)
 }
@@ -52,18 +66,29 @@ decorate.glmnet = function(x, lambda.s, ...){
 #'
 #' @param x A "party" object.
 #' @param ... Arguments to pass on to the "decorate.default" function.
+#'
+#' @examples
+#' library("evtree")
+#' library("r2pmml")
+#'
+#' data(iris)
+#' iris.party = evtree(Species ~ ., data = iris)
+#' iris.party = decorate(iris.party)
+#' r2pmml(iris.party, "Iris-Party.pmml")
 decorate.party = function(x, ...){
-	ids = 1:length(x)
 
-	predicted = list()
+	if(is.null(x$predicted)){
+		predicted = list()
 
-	predicted$"(response)" = partykit::predict_party(x, id = ids, type = "response")
-	
-	if(is.factor(predicted$"(response)")){
-		predicted$"(prob)" = partykit::predict_party(x, id = ids, type = "prob")
+		ids = 1:length(x)
+
+		predicted$"(response)" = partykit::predict_party(x, id = ids, type = "response")
+		if(is.factor(predicted$"(response)")){
+			predicted$"(prob)" = partykit::predict_party(x, id = ids, type = "prob")
+		}
+
+		x$predicted = predicted
 	}
-
-	x$predicted = predicted
 
 	decorate.default(x, ...)
 }
@@ -82,6 +107,15 @@ decorate.randomForest = function(x, compact = FALSE, ...){
 #' @param x A "ranger" object.
 #' @param data The training dataset.
 #' @param ... Arguments to pass on to the "decorate.default" function.
+#'
+#' @examples
+#' library("ranger")
+#' library("r2pmml")
+#'
+#' data(iris)
+#' iris.ranger = ranger(Species ~ ., data = iris, write.forest = TRUE, probability = TRUE)
+#' iris.ranger = decorate(iris.ranger, data = iris)
+#' r2pmml(iris.ranger, "Iris-Ranger.pmml")
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
@@ -125,25 +159,48 @@ decorate.train = function(x, ...){
 #' @param ntreelimit The number of decision trees (aka boosting rounds) to convert.
 #' @param compact A flag controlling if decision trees should be transformed from binary splits (FALSE) to multi-way splits (TRUE) representation.
 #' @param ... Arguments to pass on to the "decorate.default" function.
+#'
+#' @examples
+#' library("xgboost")
+#' library("r2pmml")
+#'
+#' data(iris)
+#' iris_x = iris[, -ncol(iris)]
+#' iris_y = iris[, ncol(iris)]
+#' # Convert from factor to integer[0, num_class]
+#' iris_y = (as.integer(iris_y) - 1)
+#' iris.fmap = genFMap(iris_x)
+#' iris.dmatrix = genDMatrix(iris_y, iris_x)
+#' iris.xgboost = xgboost(data = iris.dmatrix, 
+#'     objective = "multi:softprob", num_class = 3, nrounds = 11)
+#' iris.xgboost = decorate(iris.xgboost, iris.fmap, 
+#'     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
+#' r2pmml(iris.xgboost, "Iris-XGBoost.pmml", compact = FALSE)
+#' r2pmml(iris.xgboost, "Iris-XGBoost-compact.pmml", compact = TRUE)
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
-	x$fmap = fmap
 
-	schema = list()
-
-	if(!is.null(response_name)){
-		schema$response_name = response_name
+	if(is.null(x$fmap)){
+		x$fmap = fmap
 	}
 
-	if(length(response_levels) > 0){
-		schema$response_levels = response_levels
-	}
+	if(is.null(x$schema)){
+		schema = list()
 
-	if(!is.null(missing)){
-		schema$missing = missing
-	}
+		if(!is.null(response_name)){
+			schema$response_name = response_name
+		}
 
-	if(length(schema) > 0){
-		x$schema = schema
+		if(length(response_levels) > 0){
+			schema$response_levels = response_levels
+		}
+
+		if(!is.null(missing)){
+			schema$missing = missing
+		}
+
+		if(length(schema) > 0){
+			x$schema = schema
+		}
 	}
 
 	if(is.null(x$ntreelimit)){

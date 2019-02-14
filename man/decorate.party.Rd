@@ -14,3 +14,12 @@ decorate.party(x, ...)
 \description{
 Decorates a "party" object with a "predicted" element.
 }
+\examples{
+library("evtree")
+library("r2pmml")
+
+data(iris)
+iris.party = evtree(Species ~ ., data = iris)
+iris.party = decorate(iris.party)
+r2pmml(iris.party, "Iris-Party.pmml")
+}
