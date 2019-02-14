@@ -31,7 +31,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
 
 	main = function(){
-		saveRDS(x, tempfile)
+		saveRDS(x, tempfile, version = 2)
 
 		.convert(tempfile, file, converter, converter_classpath, verbose)
 	}
