@@ -3,7 +3,7 @@
 #' @param x A model object.
 #' @param ... Arguments to pass on to the selected function.
 decorate = function(x, ...){
-	NextMethod("decorate")
+	UseMethod("decorate")
 }
 
 #' Decorates an "earth" object with an "xlevels" element.

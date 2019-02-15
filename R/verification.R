@@ -4,7 +4,7 @@
 #' @param newdata The verification dataset.
 #' @param ... Arguments to pass on to the selected function.
 verify = function(x, newdata, ...){
-	NextMethod("verify")
+	UseMethod("verify")
 }
 
 #' Enhances a "glm" object with verification data.
