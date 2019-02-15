@@ -4,7 +4,8 @@
 \alias{verify.glm}
 \title{Enhances a "glm" object with verification data.}
 \usage{
-verify.glm(x, newdata, precision = 1e-13, zeroThreshold = 1e-13)
+\method{verify}{glm}(x, newdata, precision = 1e-13,
+  zeroThreshold = 1e-13, ...)
 }
 \arguments{
 \item{x}{A "glm" object.}
@@ -14,6 +15,8 @@ verify.glm(x, newdata, precision = 1e-13, zeroThreshold = 1e-13)
 \item{precision}{Maximal relative error.}
 
 \item{zeroThreshold}{Maximal absolute error near the zero value.}
+
+\item{...}{Further arguments.}
 }
 \description{
 Enhances a "glm" object with verification data.

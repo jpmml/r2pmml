@@ -4,7 +4,7 @@
 \alias{decorate.earth}
 \title{Decorates an "earth" object with an "xlevels" element.}
 \usage{
-decorate.earth(x, data, ...)
+\method{decorate}{earth}(x, data, ...)
 }
 \arguments{
 \item{x}{An "earth" object.}

@@ -13,6 +13,7 @@ verify = function(x, newdata, ...){
 #' @param newdata The verification dataset.
 #' @param precision Maximal relative error.
 #' @param zeroThreshold Maximal absolute error near the zero value.
+#' @param ... Further arguments.
 #'
 #' @examples
 #' library("mlbench")
@@ -22,7 +23,7 @@ verify = function(x, newdata, ...){
 #' housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 #' housing.glm = verify(housing.glm, newdata = BostonHousing[sample(nrow(BostonHousing), 10), ])
 #' r2pmml(housing.glm, "Housing-GLM-verified.pmml")
-verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13){
+verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
 	active_values = newdata
 
 	familyFamily = x$family$family
@@ -89,7 +90,8 @@ verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ..
 #'
 #' @param x A model object.
 #' @param newdata The verification dataset.
-verify.default = function(x, newdata){
+#' @param ... Further arguments.
+verify.default = function(x, newdata, ...){
 	stop(paste("Verification is not implemented for", class(x)[[1]], sep = " "))
 }
 

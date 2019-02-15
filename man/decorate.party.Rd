@@ -4,7 +4,7 @@
 \alias{decorate.party}
 \title{Decorates a "party" object with a "predicted" element.}
 \usage{
-decorate.party(x, ...)
+\method{decorate}{party}(x, ...)
 }
 \arguments{
 \item{x}{A "party" object.}

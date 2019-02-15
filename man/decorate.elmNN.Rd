@@ -4,7 +4,7 @@
 \alias{decorate.elmNN}
 \title{Decorates an "elmNN" object with a "model" element.}
 \usage{
-decorate.elmNN(x, data, ...)
+\method{decorate}{elmNN}(x, data, ...)
 }
 \arguments{
 \item{x}{An "elmNN" object.}

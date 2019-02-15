@@ -4,7 +4,7 @@
 \alias{decorate.randomForest}
 \title{Decorates a "randomForest" object with PMML conversion options.}
 \usage{
-decorate.randomForest(x, compact = FALSE, ...)
+\method{decorate}{randomForest}(x, compact = FALSE, ...)
 }
 \arguments{
 \item{x}{A "randomForest" object.}

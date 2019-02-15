@@ -215,7 +215,8 @@ decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels =
 #' @param x The model object.
 #' @param preProcess A "train::preProcess" object.
 #' @param pmml_options A list of model type-dependent PMML conversion options.
-decorate.default = function(x, preProcess = NULL, pmml_options = NULL){
+#' @param ... Further arguments.
+decorate.default = function(x, preProcess = NULL, pmml_options = NULL, ...){
 
 	if(!is.null(preProcess)){
 		x$preProcess = preProcess

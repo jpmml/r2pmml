@@ -4,7 +4,8 @@
 \alias{decorate.default}
 \title{Decorates a model object with "preProcess" and "pmml_options" elements.}
 \usage{
-decorate.default(x, preProcess = NULL, pmml_options = NULL)
+\method{decorate}{default}(x, preProcess = NULL, pmml_options = NULL,
+  ...)
 }
 \arguments{
 \item{x}{The model object.}
@@ -12,6 +13,8 @@ decorate.default(x, preProcess = NULL, pmml_options = NULL)
 \item{preProcess}{A "train::preProcess" object.}
 
 \item{pmml_options}{A list of model type-dependent PMML conversion options.}
+
+\item{...}{Further arguments.}
 }
 \description{
 Decorates a model object with "preProcess" and "pmml_options" elements.

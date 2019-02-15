@@ -4,12 +4,14 @@
 \alias{verify.default}
 \title{Enhances a model object with verification data.}
 \usage{
-verify.default(x, newdata)
+\method{verify}{default}(x, newdata, ...)
 }
 \arguments{
 \item{x}{A model object.}
 
 \item{newdata}{The verification dataset.}
+
+\item{...}{Further arguments.}
 }
 \description{
 Enhances a model object with verification data.

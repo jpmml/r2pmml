@@ -4,7 +4,7 @@
 \alias{decorate.ranger}
 \title{Decorates a "ranger" object with a "variable.levels" element.}
 \usage{
-decorate.ranger(x, data, ...)
+\method{decorate}{ranger}(x, data, ...)
 }
 \arguments{
 \item{x}{A "ranger" object.}

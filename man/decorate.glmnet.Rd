@@ -4,7 +4,7 @@
 \alias{decorate.glmnet}
 \title{Decorates a "glmnet" object with a "lambda.s" element.}
 \usage{
-decorate.glmnet(x, lambda.s, ...)
+\method{decorate}{glmnet}(x, lambda.s, ...)
 }
 \arguments{
 \item{x}{A "glmnet" object.}

@@ -4,7 +4,7 @@
 \alias{decorate.svm.formula}
 \title{Decorates a "svm.formula" object with an "xlevels" element.}
 \usage{
-decorate.svm.formula(x, data, ...)
+\method{decorate}{svm.formula}(x, data, ...)
 }
 \arguments{
 \item{x}{A "svm.formula" object.}

@@ -4,7 +4,7 @@
 \alias{decorate.train}
 \title{Decorates the final model of a "train" object with model type-dependent elements.}
 \usage{
-decorate.train(x, ...)
+\method{decorate}{train}(x, ...)
 }
 \arguments{
 \item{x}{A "train" object.}
