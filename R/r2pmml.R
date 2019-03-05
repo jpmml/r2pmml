@@ -15,19 +15,19 @@
 #' data(iris)
 #' iris.rf = randomForest(Species ~ ., data = iris, ntree = 7)
 #' # Convert "randomForest" object to R-style (deep binary splits) MiningModel
-#' pmmlFile = paste(tempdir(), "Iris-RandomForest.pmml", sep = .Platform$path.sep)
+#' pmmlFile = file.path(tempdir(), "Iris-RandomForest.pmml")
 #' r2pmml(iris.rf, pmmlFile)
 #' # Convert "randomForest" object to PMML-style (shallow multi-way splits) MiningModel
-#' compactPmmlFile = paste(tempdir(), "Iris-RandomForest-compact.pmml", sep = .Platform$path.sep)
+#' compactPmmlFile = file.path(tempdir(), "Iris-RandomForest-compact.pmml")
 #' r2pmml(iris.rf, compactPmmlFile, compact = TRUE)
 #'
 #' data(BostonHousing)
 #' housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 #' # Convert "glm" object into GeneralRegressionModel
-#' genRegPmmlFile = paste(tempdir(), "Housing-GLM.pmml", sep = .Platform$path.sep)
+#' genRegPmmlFile = file.path(tempdir(), "Housing-GLM.pmml")
 #' r2pmml(housing.glm, genRegPmmlFile)
 #' # Convert "glm" object into RegressionModel
-#' regPmmlFile = paste(tempdir(), "Housing-LM.pmml", sep = .Platform$path.sep)
+#' regPmmlFile = file.path(tempdir(), "Housing-LM.pmml")
 #' r2pmml(housing.glm, regPmmlFile, converter = "org.jpmml.rexp.LMConverter")
 r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
 	x = decorate(x, ...)
@@ -48,7 +48,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 
 	pkg.r2pmml = pkgs["r2pmml", ]
 
-	java_dir = file.path(pkg.r2pmml["LibPath"], pkg.r2pmml["Package"], "java", fsep = .Platform$file.sep)
+	java_dir = file.path(pkg.r2pmml["LibPath"], pkg.r2pmml["Package"], "java")
 
 	jar_files = list.files(path = java_dir, pattern = "*.jar", full.names = TRUE)
 

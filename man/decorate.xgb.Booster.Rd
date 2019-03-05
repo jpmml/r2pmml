@@ -43,8 +43,8 @@ iris.xgboost = xgboost(data = iris.dmatrix,
     objective = "multi:softprob", num_class = 3, nrounds = 11)
 iris.xgboost = decorate(iris.xgboost, iris.fmap, 
     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
-pmmlFile = paste(tempdir(), "Iris-XGBoost.pmml", sep = .Platform$path.sep)
+pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
 r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
-compactPmmlFile = paste(tempdir(), "Iris-XGBoost-compact.pmml", sep = .Platform$path.sep)
+compactPmmlFile = file.path(tempdir(), "Iris-XGBoost-compact.pmml")
 r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
 }

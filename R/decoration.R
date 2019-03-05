@@ -52,7 +52,7 @@ decorate.elmNN = function(x, data, ...){
 #' iris_y = iris[, ncol(iris)]
 #' iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
 #' iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
-#' r2pmml(iris.glmnet, paste(tempdir(), "Iris-GLMNet.pmml", sep = .Platform$path.sep))
+#' r2pmml(iris.glmnet, file.path(tempdir(), "Iris-GLMNet.pmml"))
 decorate.glmnet = function(x, lambda.s, ...){
 
 	if(is.null(x$lambda.s)){
@@ -74,7 +74,7 @@ decorate.glmnet = function(x, lambda.s, ...){
 #' data(iris)
 #' iris.party = evtree(Species ~ ., data = iris)
 #' iris.party = decorate(iris.party)
-#' r2pmml(iris.party, paste(tempdir(), "Iris-Party.pmml", sep = .Platform$path.sep))
+#' r2pmml(iris.party, file.path(tempdir(), "Iris-Party.pmml"))
 decorate.party = function(x, ...){
 
 	if(is.null(x$predicted)){
@@ -115,7 +115,7 @@ decorate.randomForest = function(x, compact = FALSE, ...){
 #' data(iris)
 #' iris.ranger = ranger(Species ~ ., data = iris, write.forest = TRUE, probability = TRUE)
 #' iris.ranger = decorate(iris.ranger, data = iris)
-#' r2pmml(iris.ranger, paste(tempdir(), "Iris-Ranger.pmml", sep = .Platform$path.sep))
+#' r2pmml(iris.ranger, file.path(tempdir(), "Iris-Ranger.pmml"))
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
@@ -175,9 +175,9 @@ decorate.train = function(x, ...){
 #'     objective = "multi:softprob", num_class = 3, nrounds = 11)
 #' iris.xgboost = decorate(iris.xgboost, iris.fmap, 
 #'     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
-#' pmmlFile = paste(tempdir(), "Iris-XGBoost.pmml", sep = .Platform$path.sep)
+#' pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
 #' r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
-#' compactPmmlFile = paste(tempdir(), "Iris-XGBoost-compact.pmml", sep = .Platform$path.sep)
+#' compactPmmlFile = file.path(tempdir(), "Iris-XGBoost-compact.pmml")
 #' r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
 

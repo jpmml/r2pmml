@@ -25,5 +25,5 @@ iris_x = as.matrix(iris[, -ncol(iris)])
 iris_y = iris[, ncol(iris)]
 iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
 iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
-r2pmml(iris.glmnet, paste(tempdir(), "Iris-GLMNet.pmml", sep = .Platform$path.sep))
+r2pmml(iris.glmnet, file.path(tempdir(), "Iris-GLMNet.pmml"))
 }
