@@ -19,7 +19,8 @@ library("evtree")
 library("r2pmml")
 
 data(iris)
-iris.party = evtree(Species ~ ., data = iris)
+iris.party = evtree(Species ~ ., data = iris,
+    control = evtree.control(max_depth = 3))
 iris.party = decorate(iris.party)
 r2pmml(iris.party, file.path(tempdir(), "Iris-Party.pmml"))
 }

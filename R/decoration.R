@@ -72,7 +72,8 @@ decorate.glmnet = function(x, lambda.s, ...){
 #' library("r2pmml")
 #'
 #' data(iris)
-#' iris.party = evtree(Species ~ ., data = iris)
+#' iris.party = evtree(Species ~ ., data = iris,
+#'     control = evtree.control(max_depth = 3))
 #' iris.party = decorate(iris.party)
 #' r2pmml(iris.party, file.path(tempdir(), "Iris-Party.pmml"))
 decorate.party = function(x, ...){
@@ -113,7 +114,8 @@ decorate.randomForest = function(x, compact = FALSE, ...){
 #' library("r2pmml")
 #'
 #' data(iris)
-#' iris.ranger = ranger(Species ~ ., data = iris, write.forest = TRUE, probability = TRUE)
+#' iris.ranger = ranger(Species ~ ., data = iris, num.trees = 17,
+#'     write.forest = TRUE, probability = TRUE)
 #' iris.ranger = decorate(iris.ranger, data = iris)
 #' r2pmml(iris.ranger, file.path(tempdir(), "Iris-Ranger.pmml"))
 decorate.ranger = function(x, data, ...){

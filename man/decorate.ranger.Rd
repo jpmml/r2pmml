@@ -21,7 +21,8 @@ library("ranger")
 library("r2pmml")
 
 data(iris)
-iris.ranger = ranger(Species ~ ., data = iris, write.forest = TRUE, probability = TRUE)
+iris.ranger = ranger(Species ~ ., data = iris, num.trees = 17,
+    write.forest = TRUE, probability = TRUE)
 iris.ranger = decorate(iris.ranger, data = iris)
 r2pmml(iris.ranger, file.path(tempdir(), "Iris-Ranger.pmml"))
 }
