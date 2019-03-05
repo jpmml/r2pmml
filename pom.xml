@@ -50,6 +50,47 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>modify-libraries</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<property
+									name="guava.version"
+									value="27.0.1-jre"
+								/>
+								<jar 
+									destfile="${project.basedir}/inst/java/guava-${guava.version}-minified.jar"
+								>
+									<zipfileset
+										src="${project.basedir}/inst/java/guava-${guava.version}.jar"
+									>
+										<exclude name="com/google/common/cache/**"/>
+										<exclude name="com/google/common/escape/**"/>
+										<exclude name="com/google/common/eventbus/**"/>
+										<exclude name="com/google/common/graph/**"/>
+										<exclude name="com/google/common/hash/**"/>
+										<exclude name="com/google/common/html/**"/>
+										<exclude name="com/google/common/net/**"/>
+										<exclude name="com/google/common/reflect/**"/>
+										<exclude name="com/google/common/util/concurrent/**"/>
+										<exclude name="com/google/common/xml/**"/>
+									</zipfileset>
+								</jar>
+								<delete file="${project.basedir}/inst/java/guava-${guava.version}.jar"/>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
