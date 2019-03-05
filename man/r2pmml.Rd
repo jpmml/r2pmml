@@ -31,14 +31,18 @@ library("r2pmml")
 data(iris)
 iris.rf = randomForest(Species ~ ., data = iris, ntree = 7)
 # Convert "randomForest" object to R-style (deep binary splits) MiningModel
-r2pmml(iris.rf, "Iris-RandomForest.pmml")
+pmmlFile = paste(tempdir(), "Iris-RandomForest.pmml", sep = .Platform$path.sep)
+r2pmml(iris.rf, pmmlFile)
 # Convert "randomForest" object to PMML-style (shallow multi-way splits) MiningModel
-r2pmml(iris.rf, "Iris-RandomForest-compact.pmml", compact = TRUE)
+compactPmmlFile = paste(tempdir(), "Iris-RandomForest-compact.pmml", sep = .Platform$path.sep)
+r2pmml(iris.rf, compactPmmlFile, compact = TRUE)
 
 data(BostonHousing)
 housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 # Convert "glm" object into GeneralRegressionModel
-r2pmml(housing.glm, "Housing-GLM.pmml")
+genRegPmmlFile = paste(tempdir(), "Housing-GLM.pmml", sep = .Platform$path.sep)
+r2pmml(housing.glm, genRegPmmlFile)
 # Convert "glm" object into RegressionModel
-r2pmml(housing.glm, "Housing-LM.pmml", converter = "org.jpmml.rexp.LMConverter")
+regPmmlFile = paste(tempdir(), "Housing-LM.pmml", sep = .Platform$path.sep)
+r2pmml(housing.glm, regPmmlFile, converter = "org.jpmml.rexp.LMConverter")
 }

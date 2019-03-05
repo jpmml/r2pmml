@@ -21,5 +21,5 @@ library("r2pmml")
 data(iris)
 iris.party = evtree(Species ~ ., data = iris)
 iris.party = decorate(iris.party)
-r2pmml(iris.party, "Iris-Party.pmml")
+r2pmml(iris.party, paste(tempdir(), "Iris-Party.pmml", sep = .Platform$path.sep))
 }
