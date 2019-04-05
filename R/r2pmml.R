@@ -76,7 +76,12 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	}
 
 	result = system2("java", args)
+
+	if(result == 127){
+		stop(c("Java is not installed, or the Java executable is not on system path (error code ", result, ")"));
+	} else
+
 	if(result != 0){
-		stop(result)
+		stop(c("The JPMML-R conversion application has failed (error code ", result, "). The Java executable should have printed more information about the failure into its standard output and/or standard error streams"))
 	}
 }
