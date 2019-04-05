@@ -44,11 +44,9 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 }
 
 .classpath = function(){
-	pkgs = installed.packages()
+	pkg.r2pmml = find.package("r2pmml")
 
-	pkg.r2pmml = pkgs["r2pmml", ]
-
-	java_dir = file.path(pkg.r2pmml["LibPath"], pkg.r2pmml["Package"], "java")
+	java_dir = file.path(pkg.r2pmml, "java")
 
 	jar_files = list.files(path = java_dir, pattern = "*.jar", full.names = TRUE)
 

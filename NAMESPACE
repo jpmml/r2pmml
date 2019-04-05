@@ -1,5 +1,5 @@
 importFrom("stats", "model.frame", "model.matrix", "na.omit", "predict")
-importFrom("utils", "installed.packages", "write.table")
+importFrom("utils", "write.table")
 
 S3method("decorate", "default")
 S3method("decorate", "earth")
