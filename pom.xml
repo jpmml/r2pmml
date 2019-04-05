@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.jpmml</groupId>
 			<artifactId>jpmml-r</artifactId>
-			<version>1.3.12</version>
+			<version>1.3.13</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.jpmml</groupId>
@@ -63,7 +63,7 @@
 							<tasks>
 								<property
 									name="guava.version"
-									value="27.0.1-jre"
+									value="27.1-jre"
 								/>
 								<jar 
 									destfile="${project.basedir}/inst/java/guava-${guava.version}-minified.jar"

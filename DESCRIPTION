@@ -1,6 +1,6 @@
 Package: r2pmml
-Version: 0.21.5
-Date: 2019-03-05
+Version: 0.22.0
+Date: 2019-04-05
 Type: Package
 License: AGPL-3
 Title: Convert R Models to PMML
