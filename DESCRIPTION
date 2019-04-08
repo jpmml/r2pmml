@@ -23,3 +23,4 @@ Suggests:
     randomForest,
     ranger,
     xgboost
+SystemRequirements: Java (>= 8.0)
