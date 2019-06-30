@@ -85,7 +85,7 @@ Supported model formula features:
 * `base::I(..)` function terms:
    * Logical operators `&`, `|` and `!`.
    * Relational operators `==`, `!=`, `<`, `<=`, `>=` and `>`.
-   * Arithmetic operators `+`, `-`, `/` and `*`.
+   * Arithmetic operators `+`, `-`, `*`, `/`, and `%`.
    * Exponentiation operators `^` and `**`.
    * The `is.na` function.
    * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
