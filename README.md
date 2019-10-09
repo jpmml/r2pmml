@@ -21,7 +21,7 @@ Installing the package from its GitHub repository using the [`devtools` package]
 ```R
 library("devtools")
 
-install_git("git://github.com/jpmml/r2pmml.git")
+install_git("https://github.com/jpmml/r2pmml.git")
 ```
 
 # Usage #
