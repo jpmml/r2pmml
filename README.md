@@ -1,23 +1,28 @@
 R2PMML
 ======
 
-R package for converting R models to PMML
+R package for converting [R](https://www.r-project.org/) models to PMML
 
 # Features #
 
-This package supersedes the standard [`pmml` package](https://cran.r-project.org/package=pmml):
+This library is a thin wrapper around the JPMML-R command-line application.
 
-* It produces valid and standards-compliant PMML markup.
-* It supports several model types (eg. `gbm`, `iForest`, `ranger`, `xgb.Booster`) that are not supported by the standard `pmml` package.
-* It is extremely fast and memory efficient. For example, it can convert a typical `randomForest` model to a PMML file in a few seconds time, whereas the standard `pmml` package requires several hours to do the same.
+For a list of supported model and transformation types, please refer to [JPMML-R features](https://github.com/jpmml/jpmml-r#features).
 
 # Prerequisites #
 
-* Java 1.7 or newer. The Java executable must be available on system path.
+* Java 1.8 or newer. The Java executable must be available on system path.
 
 # Installation #
 
-Installing the package from its GitHub repository using the [`devtools` package](https://cran.r-project.org/package=devtools):
+Installing the latest release version from CRAN:
+
+```R
+install.packages("r2pmml")
+```
+
+Alternatively, installing a snapshot version from GitHub using the [`devtools`](https://cran.r-project.org/package=devtools) package:
+
 ```R
 library("devtools")
 
@@ -29,11 +34,13 @@ install_git("git://github.com/jpmml/r2pmml.git")
 ### Base functionality
 
 Loading the package:
+
 ```R
 library("r2pmml")
 ```
 
 Training and exporting a simple `randomForest` model:
+
 ```R
 library("randomForest")
 library("r2pmml")
@@ -53,6 +60,7 @@ r2pmml(iris.rf, "iris_rf.pmml")
 The `r2pmml` function takes an optional argument `preProcess`, which associates the model with data pre-processing transformations.
 
 Training and exporting a more sophisticated `randomForest` model:
+
 ```R
 library("caret")
 library("randomForest")
@@ -77,22 +85,10 @@ r2pmml(iris.rf, "iris_rf.pmml", preProcess = iris.preProcess)
 
 ### Model formulae
 
-Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models with data pre-processing transformations via [model formulae](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
-
-Supported model formula features:
-
-* Interaction terms.
-* `base::I(..)` function terms:
-   * Logical operators `&`, `|` and `!`.
-   * Relational operators `==`, `!=`, `<`, `<=`, `>=` and `>`.
-   * Arithmetic operators `+`, `-`, `*`, `/`, and `%`.
-   * Exponentiation operators `^` and `**`.
-   * The `is.na` function.
-   * Arithmetic functions `abs`, `ceiling`, `exp`, `floor`, `log`, `log10`, `round` and `sqrt`.
-* `base::cut()` and `base::ifelse()` function terms.
-* `plyr::revalue()` and `plyr::mapvalues()` function terms.
+Alternatively, it is possible to associate `lm`, `glm` and `randomForest` models with data pre-processing transformations using [model formulae](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
 
 Training and exporting a `glm` model:
+
 ```R
 library("plyr")
 library("r2pmml")
@@ -113,6 +109,7 @@ r2pmml(auto.glm, "auto_glm.pmml")
 ### Package `ranger`
 
 Training and exporting a `ranger` model:
+
 ```R
 library("ranger")
 library("r2pmml")
@@ -132,6 +129,7 @@ r2pmml(iris.ranger, "iris_ranger.pmml", data = iris)
 ### Package `xgboost`
 
 Training and exporting an `xgb.Booster` model:
+
 ```R
 library("xgboost")
 library("r2pmml")
@@ -161,6 +159,7 @@ r2pmml(iris.xgb, "iris_xgb.pmml", fmap = iris.fmap, response_name = "Species", r
 ### Advanced functionality
 
 Tweaking JVM configuration:
+
 ```R
 Sys.setenv(JAVA_TOOL_OPTIONS = "-Xms4G -Xmx8G")
 
@@ -168,17 +167,15 @@ r2pmml(iris.rf, "iris_rf.pmml")
 ```
 
 Employing a custom converter class:
+
 ```R
 r2pmml(iris.rf, "iris_rf.pmml", converter = "com.mycompany.MyRandomForestConverter", converter_classpath = "/path/to/myconverter-1.0-SNAPSHOT.jar")
 ```
 
-Please refer to the following resources for more ideas and code examples:
-
-* [Converting R to PMML](https://www.slideshare.net/VilluRuusmann/converting-r-to-pmml-82182483)
-
 # De-installation #
 
 Removing the package:
+
 ```R
 remove.packages("r2pmml")
 ```
