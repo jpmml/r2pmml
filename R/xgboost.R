@@ -92,5 +92,8 @@ genDMatrix = function(df_y, df_X, file = tempfile(pattern = "DMatrix", fileext =
 
 	close(fp)
 
-	return (xgboost::xgb.DMatrix(file))
+	# XGBoost URI parser only accepts forward slashes (even on the Windows platform)
+	xgbFile = gsub("\\", "/", file, fixed = TRUE)
+
+	return (xgboost::xgb.DMatrix(xgbFile))
 }
