@@ -15,13 +15,13 @@ For a list of supported model and transformation types, please refer to [JPMML-R
 
 # Installation #
 
-Installing the latest release version from CRAN:
+Installing a release version from CRAN:
 
 ```R
 install.packages("r2pmml")
 ```
 
-Alternatively, installing a snapshot version from GitHub using the [`devtools`](https://cran.r-project.org/package=devtools) package:
+Alternatively, installing the latest snapshot version from GitHub using the [`devtools`](https://cran.r-project.org/package=devtools) package:
 
 ```R
 library("devtools")
