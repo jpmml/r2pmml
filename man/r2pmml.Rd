@@ -24,6 +24,7 @@ r2pmml(x, file, converter = NULL, converter_classpath = NULL,
 Converts an R model object to PMML.
 }
 \examples{
+\donttest{
 library("mlbench")
 library("randomForest")
 library("r2pmml")
@@ -45,4 +46,5 @@ r2pmml(housing.glm, genRegPmmlFile)
 # Convert "glm" object into RegressionModel
 regPmmlFile = file.path(tempdir(), "Housing-LM.pmml")
 r2pmml(housing.glm, regPmmlFile, converter = "org.jpmml.rexp.LMConverter")
+}
 }

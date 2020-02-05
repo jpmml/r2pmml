@@ -8,6 +8,7 @@
 #' @param ... Arguments to be passed on to the "r2pmml::decorate" function.
 #'
 #' @examples
+#' \donttest{
 #' library("mlbench")
 #' library("randomForest")
 #' library("r2pmml")
@@ -29,6 +30,7 @@
 #' # Convert "glm" object into RegressionModel
 #' regPmmlFile = file.path(tempdir(), "Housing-LM.pmml")
 #' r2pmml(housing.glm, regPmmlFile, converter = "org.jpmml.rexp.LMConverter")
+#' }
 r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
 	x = decorate(x, ...)
 

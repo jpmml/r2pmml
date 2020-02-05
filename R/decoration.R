@@ -44,6 +44,7 @@ decorate.elmNN = function(x, data, ...){
 #' @param ... Arguments to pass on to the "decorate.default" function.
 #'
 #' @examples
+#' \donttest{
 #' library("glmnet")
 #' library("r2pmml")
 #'
@@ -53,6 +54,7 @@ decorate.elmNN = function(x, data, ...){
 #' iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
 #' iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
 #' r2pmml(iris.glmnet, file.path(tempdir(), "Iris-GLMNet.pmml"))
+#' }
 decorate.glmnet = function(x, lambda.s, ...){
 
 	if(is.null(x$lambda.s)){
@@ -68,6 +70,7 @@ decorate.glmnet = function(x, lambda.s, ...){
 #' @param ... Arguments to pass on to the "decorate.default" function.
 #'
 #' @examples
+#' \donttest{
 #' library("evtree")
 #' library("r2pmml")
 #'
@@ -76,6 +79,7 @@ decorate.glmnet = function(x, lambda.s, ...){
 #'     control = evtree.control(max_depth = 3))
 #' iris.party = decorate(iris.party)
 #' r2pmml(iris.party, file.path(tempdir(), "Iris-Party.pmml"))
+#' }
 decorate.party = function(x, ...){
 
 	if(is.null(x$predicted)){
@@ -110,6 +114,7 @@ decorate.randomForest = function(x, compact = FALSE, ...){
 #' @param ... Arguments to pass on to the "decorate.default" function.
 #'
 #' @examples
+#' \donttest{
 #' library("ranger")
 #' library("r2pmml")
 #'
@@ -118,6 +123,7 @@ decorate.randomForest = function(x, compact = FALSE, ...){
 #'     write.forest = TRUE, probability = TRUE)
 #' iris.ranger = decorate(iris.ranger, data = iris)
 #' r2pmml(iris.ranger, file.path(tempdir(), "Iris-Ranger.pmml"))
+#' }
 decorate.ranger = function(x, data, ...){
 
 	if(is.null(x$variable.levels)){
@@ -163,6 +169,7 @@ decorate.train = function(x, ...){
 #' @param ... Arguments to pass on to the "decorate.default" function.
 #'
 #' @examples
+#' \donttest{
 #' library("xgboost")
 #' library("r2pmml")
 #'
@@ -181,6 +188,7 @@ decorate.train = function(x, ...){
 #' r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
 #' compactPmmlFile = file.path(tempdir(), "Iris-XGBoost-compact.pmml")
 #' r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
+#' }
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
 
 	if(is.null(x$fmap)){

@@ -29,6 +29,7 @@
 Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.
 }
 \examples{
+\donttest{
 library("xgboost")
 library("r2pmml")
 
@@ -47,4 +48,5 @@ pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
 r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
 compactPmmlFile = file.path(tempdir(), "Iris-XGBoost-compact.pmml")
 r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
+}
 }

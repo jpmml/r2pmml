@@ -16,6 +16,7 @@ verify = function(x, newdata, ...){
 #' @param ... Further arguments.
 #'
 #' @examples
+#' \donttest{
 #' library("mlbench")
 #' library("r2pmml")
 #'
@@ -23,6 +24,7 @@ verify = function(x, newdata, ...){
 #' housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 #' housing.glm = verify(housing.glm, newdata = BostonHousing[sample(nrow(BostonHousing), 10), ])
 #' r2pmml(housing.glm, file.path(tempdir(), "Housing-GLM-verified.pmml"))
+#' }
 verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
 	active_values = newdata
 

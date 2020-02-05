@@ -22,6 +22,7 @@
 Enhances a "glm" object with verification data.
 }
 \examples{
+\donttest{
 library("mlbench")
 library("r2pmml")
 
@@ -29,4 +30,5 @@ data(BostonHousing)
 housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 housing.glm = verify(housing.glm, newdata = BostonHousing[sample(nrow(BostonHousing), 10), ])
 r2pmml(housing.glm, file.path(tempdir(), "Housing-GLM-verified.pmml"))
+}
 }

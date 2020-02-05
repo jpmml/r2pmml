@@ -15,6 +15,7 @@
 Decorates a "party" object with a "predicted" element.
 }
 \examples{
+\donttest{
 library("evtree")
 library("r2pmml")
 
@@ -23,4 +24,5 @@ iris.party = evtree(Species ~ ., data = iris,
     control = evtree.control(max_depth = 3))
 iris.party = decorate(iris.party)
 r2pmml(iris.party, file.path(tempdir(), "Iris-Party.pmml"))
+}
 }

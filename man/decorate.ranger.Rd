@@ -17,6 +17,7 @@
 Decorates a "ranger" object with a "variable.levels" element.
 }
 \examples{
+\donttest{
 library("ranger")
 library("r2pmml")
 
@@ -25,4 +26,5 @@ iris.ranger = ranger(Species ~ ., data = iris, num.trees = 17,
     write.forest = TRUE, probability = TRUE)
 iris.ranger = decorate(iris.ranger, data = iris)
 r2pmml(iris.ranger, file.path(tempdir(), "Iris-Ranger.pmml"))
+}
 }

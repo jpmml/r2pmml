@@ -17,6 +17,7 @@
 Decorates a "glmnet" object with a "lambda.s" element.
 }
 \examples{
+\donttest{
 library("glmnet")
 library("r2pmml")
 
@@ -26,4 +27,5 @@ iris_y = iris[, ncol(iris)]
 iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
 iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
 r2pmml(iris.glmnet, file.path(tempdir(), "Iris-GLMNet.pmml"))
+}
 }
