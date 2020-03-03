@@ -19,6 +19,7 @@ Suggests:
     evtree,
     glmnet,
     mlbench,
+    mlr,
     partykit,
     randomForest,
     ranger,

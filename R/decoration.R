@@ -157,6 +157,24 @@ decorate.train = function(x, ...){
 	return (x)
 }
 
+#' Decorates a "WrappedModel" object with "invert_levels" element.
+#' Additionally, decorates the learned model with model type-dependent elements.
+#'
+#' @param x A "WrappedModel" object.
+#' @param invert_levels A flag indicating if the learned model should assume normal (FALSE) or inverted (TRUE) ordering of category values for the binary categorical target field.
+#' @param ... Arguments to pass on to the "decorate.default" function
+decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
+	task.desc = x$task.desc
+
+	if(task.desc$type == "classif" && length(task.desc$class.levels) == 2){
+		x$invert_levels = invert_levels
+	}
+
+	x$learner.model = decorate(x$learner.model, ...)
+
+	return (x)
+}
+
 #' Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.
 #'
 #' @param x An "xgb.Booster" object.

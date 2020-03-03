@@ -10,6 +10,7 @@ S3method("decorate", "randomForest")
 S3method("decorate", "ranger")
 S3method("decorate", "svm.formula")
 S3method("decorate", "train")
+S3method("decorate", "WrappedModel")
 S3method("decorate", "xgb.Booster")
 
 S3method("verify", "default")
