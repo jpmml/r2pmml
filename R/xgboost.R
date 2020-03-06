@@ -1,3 +1,10 @@
+#' Dispatches execution to the most appropriate XGBoost feature map generation function.
+#'
+#' @param x A dataset object.
+genFMap = function(x){
+	UseMethod("genFMap")
+}
+
 #' Generates an XGBoost feature map based on feature data.
 #'
 #' @param df_X A "data.frame" object with independent variables.
@@ -6,8 +13,9 @@
 #'
 #' @examples
 #' data(iris)
-#' iris.fmap = genFMap(iris[, 1:4])
-genFMap = function(df_X){
+#' iris.df = iris[, 1:4]
+#' iris.fmap = genFMap(iris.df)
+genFMap.data.frame = function(df_X){
 	col2name = function(x){
 		col = df_X[[x]]
 		if(is.factor(col)){
@@ -21,6 +29,58 @@ genFMap = function(df_X){
 		switch(class(x), "factor" = rep("i", length(levels(x))), "numeric" = "q", "integer" = "int")
 	}
 	feature_types = lapply(df_X, FUN = col2type)
+
+	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
+	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
+
+	return (fmap)
+}
+
+#' Generates an XGBoost feature map based on feature data.
+#'
+#' @param matrix_X A "matrix" object with independent variables.
+#'
+#' @return A "data.frame" object.
+#'
+#' @examples
+#' data(iris)
+#' iris.matrix = model.matrix(Species ~ . - 1, data = iris)
+#' iris.fmap = genFMap(iris.matrix)
+genFMap.matrix = function(matrix_X){
+	contrast2features = function(contrasts, name){
+		x = contrasts[[name]]
+		if(!identical(rownames(x), colnames(x))){
+			stop()
+		}
+		keys = lapply(colnames(x), FUN = function(level){ paste(name, level, sep = "") })
+		values = lapply(colnames(x), FUN = function(level){ paste(name, "=", level, sep = "") })
+		dict = c(values)
+		names(dict) = keys
+		return (dict)
+	}
+	contrasts = attr(matrix_X, "contrasts")
+	cat_features = list()
+	for(name in names(contrasts)){
+		features = contrast2features(contrasts, name)
+		cat_features = append(cat_features, features)
+	}
+
+	feature_names = list()
+	feature_types = list()
+
+	for(name in colnames(matrix_X)){
+		cat_feature = cat_features[[name]]
+
+		if(!is.null(cat_feature)){
+			feature_names = append(feature_names, cat_feature)
+			feature_types = append(feature_types, "i")
+		} else
+
+		{
+			feature_names = append(feature_names, name)
+			feature_types = append(feature_types, "q")
+		}
+	}
 
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)

@@ -2,20 +2,13 @@
 % Please edit documentation in R/xgboost.R
 \name{genFMap}
 \alias{genFMap}
-\title{Generates an XGBoost feature map based on feature data.}
+\title{Dispatches execution to the most appropriate XGBoost feature map generation function.}
 \usage{
-genFMap(df_X)
+genFMap(x)
 }
 \arguments{
-\item{df_X}{A "data.frame" object with independent variables.}
-}
-\value{
-A "data.frame" object.
+\item{x}{A dataset object.}
 }
 \description{
-Generates an XGBoost feature map based on feature data.
-}
-\examples{
-data(iris)
-iris.fmap = genFMap(iris[, 1:4])
+Dispatches execution to the most appropriate XGBoost feature map generation function.
 }
