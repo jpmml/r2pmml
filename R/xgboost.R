@@ -100,7 +100,7 @@ as.fmap.matrix = function(matrix_X){
 #'
 #' @param fmap An XGBoost feature map as a "data.frame" object.
 #' @param file A filesystem path to the result file.
-writeFMap = function(fmap, file){
+write.fmap = function(fmap, file){
 	write.table(fmap, file, sep = "\t", quote = FALSE, row.names = FALSE, col.names = FALSE)
 }
 
