@@ -49,9 +49,9 @@ decorate.elmNN = function(x, data, ...){
 #' library("r2pmml")
 #'
 #' data(iris)
-#' iris_x = as.matrix(iris[, -ncol(iris)])
+#' iris_X = as.matrix(iris[, -ncol(iris)])
 #' iris_y = iris[, ncol(iris)]
-#' iris.glmnet = glmnet(x = iris_x, y = iris_y, family = "multinomial")
+#' iris.glmnet = glmnet(x = iris_X, y = iris_y, family = "multinomial")
 #' iris.glmnet = decorate(iris.glmnet, lambda.s = iris.glmnet$lambda[49])
 #' r2pmml(iris.glmnet, file.path(tempdir(), "Iris-GLMNet.pmml"))
 #' }
@@ -192,13 +192,14 @@ decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
 #' library("r2pmml")
 #'
 #' data(iris)
-#' iris_x = iris[, -ncol(iris)]
+#' iris_X = iris[, -ncol(iris)]
 #' iris_y = iris[, ncol(iris)]
 #' # Convert from factor to integer[0, num_class]
 #' iris_y = (as.integer(iris_y) - 1)
-#' iris.fmap = as.fmap(iris_x)
-#' iris.dmatrix = genDMatrix(iris_y, iris_x)
-#' iris.xgboost = xgboost(data = iris.dmatrix, 
+#' iris.matrix = model.matrix(~ . - 1, data = iris_X)
+#' iris.DMatrix = xgb.DMatrix(iris.matrix, label = iris_y)
+#' iris.fmap = as.fmap(iris.matrix)
+#' iris.xgboost = xgboost(data = iris.DMatrix,
 #'     objective = "multi:softprob", num_class = 3, nrounds = 11)
 #' iris.xgboost = decorate(iris.xgboost, iris.fmap, 
 #'     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))

@@ -139,11 +139,12 @@ data(iris)
 iris_X = iris[, 1:4]
 iris_y = as.integer(iris[, 5]) - 1
 
-# Generate XGBoost feature map
-iris.fmap = as.fmap(iris_X)
+# Generate R model matrix
+iris.matrix = model.matrix(~ . - 1, data = iris_X)
 
-# Generate XGBoost DMatrix
-iris.DMatrix = genDMatrix(iris_y, iris_X)
+# Generate XGBoost DMatrix and feature map based on R model matrix
+iris.DMatrix = xgb.DMatrix(iris.matrix, label = iris_y)
+iris.fmap = as.fmap(iris.matrix)
 
 # Train a model
 iris.xgb = xgboost(data = iris.DMatrix, missing = NULL, objective = "multi:softmax", num_class = 3, nrounds = 13)
