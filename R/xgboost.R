@@ -33,6 +33,8 @@ genFMap.data.frame = function(df_X){
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
 
+	row.names(fmap) = NULL
+
 	return (fmap)
 }
 
@@ -47,22 +49,24 @@ genFMap.data.frame = function(df_X){
 #' iris.matrix = model.matrix(Species ~ . - 1, data = iris)
 #' iris.fmap = genFMap(iris.matrix)
 genFMap.matrix = function(matrix_X){
-	contrast2features = function(contrasts, name){
-		x = contrasts[[name]]
-		if(!identical(rownames(x), colnames(x))){
-			stop()
-		}
-		keys = lapply(colnames(x), FUN = function(level){ paste(name, level, sep = "") })
-		values = lapply(colnames(x), FUN = function(level){ paste(name, "=", level, sep = "") })
-		dict = c(values)
-		names(dict) = keys
-		return (dict)
-	}
-	contrasts = attr(matrix_X, "contrasts")
 	cat_features = list()
-	for(name in names(contrasts)){
-		features = contrast2features(contrasts, name)
-		cat_features = append(cat_features, features)
+	contrasts = attr(matrix_X, "contrasts")
+	if(!is.null(contrasts)){
+		contrast2features = function(contrasts, name){
+			x = contrasts[[name]]
+			if(!identical(rownames(x), colnames(x))){
+				stop()
+			}
+			keys = lapply(colnames(x), FUN = function(level){ paste(name, level, sep = "") })
+			values = lapply(colnames(x), FUN = function(level){ paste(name, "=", level, sep = "") })
+			dict = c(values)
+			names(dict) = keys
+			return (dict)
+		}
+		for(name in names(contrasts)){
+			features = contrast2features(contrasts, name)
+			cat_features = append(cat_features, features)
+		}
 	}
 
 	feature_names = list()
@@ -84,6 +88,8 @@ genFMap.matrix = function(matrix_X){
 
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
+
+	row.names(fmap) = NULL
 
 	return (fmap)
 }
