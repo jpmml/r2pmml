@@ -196,7 +196,7 @@ decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
 #' iris_y = iris[, ncol(iris)]
 #' # Convert from factor to integer[0, num_class]
 #' iris_y = (as.integer(iris_y) - 1)
-#' iris.fmap = genFMap(iris_x)
+#' iris.fmap = as.fmap(iris_x)
 #' iris.dmatrix = genDMatrix(iris_y, iris_x)
 #' iris.xgboost = xgboost(data = iris.dmatrix, 
 #'     objective = "multi:softprob", num_class = 3, nrounds = 11)

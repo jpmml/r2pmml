@@ -7,6 +7,7 @@ data(iris)
 
 check_iris_fmap = function(fmap){
 	test_that("FMap dimensions", {
+		expect_equal(c("fmap", "data.frame"), class(fmap))
 		expect_equal(4, nrow(fmap))
 		expect_equal(c("id", "name", "type"), colnames(fmap))
 	})
@@ -18,11 +19,11 @@ check_iris_fmap = function(fmap){
 }
 
 iris.df = iris[, 1:4]
-iris.df.fmap = genFMap(iris.df)
+iris.df.fmap = as.fmap(iris.df)
 check_iris_fmap(iris.df.fmap)
 
 iris.matrix = model.matrix(Species ~ . - 1, data = iris)
-iris.matrix.fmap = genFMap(iris.matrix)
+iris.matrix.fmap = as.fmap(iris.matrix)
 check_iris_fmap(iris.matrix.fmap)
 
 expect_equal(iris.df.fmap, iris.matrix.fmap)
@@ -31,6 +32,7 @@ data(Ozone)
 
 check_ozone_fmap = function(fmap){
 	test_that("FMap dimensions", {
+		expect_equal(c("fmap", "data.frame"), class(fmap))
 		expect_equal(51, nrow(fmap))
 		expect_equal(c("id", "name", "type"), colnames(fmap))
 	})
@@ -47,13 +49,13 @@ check_ozone_fmap = function(fmap){
 }
 
 ozone.df = Ozone[, c("V1", "V2", "V3", "V5")]
-ozone.df.fmap = genFMap(ozone.df)
+ozone.df.fmap = as.fmap(ozone.df)
 check_ozone_fmap(ozone.df.fmap)
 
 ozone.contrasts = lapply(Ozone[sapply(Ozone, is.factor)], contrasts, contrasts = FALSE)
 
 ozone.matrix = model.matrix(V4 ~ V1 + V2 + V3 + V5 - 1, data = Ozone, contrasts.arg = ozone.contrasts)
-ozone.matrix.fmap = genFMap(ozone.matrix)
+ozone.matrix.fmap = as.fmap(ozone.matrix)
 check_ozone_fmap(ozone.matrix.fmap)
 
 expect_equal(ozone.df.fmap, ozone.matrix.fmap)

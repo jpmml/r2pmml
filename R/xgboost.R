@@ -1,8 +1,8 @@
 #' Dispatches execution to the most appropriate XGBoost feature map generation function.
 #'
 #' @param x A dataset object.
-genFMap = function(x){
-	UseMethod("genFMap")
+as.fmap = function(x){
+	UseMethod("as.fmap")
 }
 
 #' Generates an XGBoost feature map based on feature data.
@@ -14,8 +14,8 @@ genFMap = function(x){
 #' @examples
 #' data(iris)
 #' iris.df = iris[, 1:4]
-#' iris.fmap = genFMap(iris.df)
-genFMap.data.frame = function(df_X){
+#' iris.fmap = as.fmap(iris.df)
+as.fmap.data.frame = function(df_X){
 	col2name = function(x){
 		col = df_X[[x]]
 		if(is.factor(col)){
@@ -33,6 +33,7 @@ genFMap.data.frame = function(df_X){
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
 
+	class(fmap) = c("fmap", class(fmap))
 	row.names(fmap) = NULL
 
 	return (fmap)
@@ -47,8 +48,8 @@ genFMap.data.frame = function(df_X){
 #' @examples
 #' data(iris)
 #' iris.matrix = model.matrix(Species ~ . - 1, data = iris)
-#' iris.fmap = genFMap(iris.matrix)
-genFMap.matrix = function(matrix_X){
+#' iris.fmap = as.fmap(iris.matrix)
+as.fmap.matrix = function(matrix_X){
 	cat_features = list()
 	contrasts = attr(matrix_X, "contrasts")
 	if(!is.null(contrasts)){
@@ -89,6 +90,7 @@ genFMap.matrix = function(matrix_X){
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
 
+	class(fmap) = c("fmap", class(fmap))
 	row.names(fmap) = NULL
 
 	return (fmap)

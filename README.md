@@ -140,7 +140,7 @@ iris_X = iris[, 1:4]
 iris_y = as.integer(iris[, 5]) - 1
 
 # Generate XGBoost feature map
-iris.fmap = genFMap(iris_X)
+iris.fmap = as.fmap(iris_X)
 
 # Generate XGBoost DMatrix
 iris.DMatrix = genDMatrix(iris_y, iris_X)

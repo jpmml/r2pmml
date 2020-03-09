@@ -13,8 +13,8 @@ S3method("decorate", "train")
 S3method("decorate", "WrappedModel")
 S3method("decorate", "xgb.Booster")
 
-S3method("genFMap", "data.frame")
-S3method("genFMap", "matrix")
+S3method("as.fmap", "data.frame")
+S3method("as.fmap", "matrix")
 
 S3method("verify", "default")
 S3method("verify", "glm")
