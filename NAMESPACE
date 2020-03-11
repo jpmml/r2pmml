@@ -19,5 +19,6 @@ S3method("as.fmap", "matrix")
 S3method("verify", "default")
 S3method("verify", "glm")
 S3method("verify", "train")
+S3method("verify", "xgb.Booster")
 
 exportPattern("^[^\\.]")

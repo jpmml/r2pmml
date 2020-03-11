@@ -88,13 +88,77 @@ verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ..
 	return (x)
 }
 
+#' Enhances an "xgb.Booster" object with verification data.
+#'
+#' @param x An "xgb.Booster" object.
+#' @param newdata The verification dataset.
+#' @param precision Maximal relative error.
+#' @param zeroThreshold Maximal absolute error near the zero value.
+#' @param response_name The name of the target field.
+#' @param response_levels A list of category values for a categorical target field.
+#' @param ... Further arguments.
+verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6, response_name = NULL, response_levels = c(), ...){
+	active_values = as.data.frame(newdata)
+
+	objective = x$params$objective
+
+	target_values = NULL
+
+	output_values = NULL
+
+	if(objective == "reg:linear" || objective == "reg:logistic"){
+		response = predict(x, newdata = newdata)
+
+		response = as.data.frame(response)
+		names(response) = response_name
+
+		target_values = response
+	} else
+
+	if(objective == "binary:logistic"){
+		prob = predict(x, newdata = newdata)
+		prob = matrix(c(1 - prob, prob), nrow = length(prob), ncol = 2)
+
+		prob = as.data.frame(prob)
+		names(prob) = names(pred) = paste("probability(", response_levels, ")", sep = "")
+
+		output_values = prob
+	} else
+
+	if(objective == "multi:softmax"){
+		response = predict(x, newdata = newdata)
+
+		response = as.data.frame(response)
+		names(response) = response_name
+
+		target_values = response
+	} else
+
+	if(objective == "multi:softprob"){
+		prob = predict(x, newdata = newdata, reshape = TRUE)
+
+		prob = as.data.frame(prob)
+		names(prob) = paste("probability(", response_levels, ")", sep = "")
+
+		output_values = prob
+	} else
+
+	{
+		stop(paste("Verification is not implemented for", objective, "objective function", sep = " "))
+	}
+
+	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
+
+	return (x)
+}
+
 #' Enhances a model object with verification data.
 #'
 #' @param x A model object.
 #' @param newdata The verification dataset.
 #' @param ... Further arguments.
 verify.default = function(x, newdata, ...){
-	stop(paste("Verification is not implemented for", class(x)[[1]], sep = " "))
+	stop(paste("Verification is not implemented for", class(x)[[1]], "class", sep = " "))
 }
 
 .makeVerification = function(precision, zeroThreshold, active_values, target_values, output_values = NULL){
