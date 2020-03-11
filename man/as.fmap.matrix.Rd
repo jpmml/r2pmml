@@ -4,10 +4,10 @@
 \alias{as.fmap.matrix}
 \title{Generates an XGBoost feature map based on feature data.}
 \usage{
-\method{as.fmap}{matrix}(matrix_X)
+\method{as.fmap}{matrix}(x)
 }
 \arguments{
-\item{matrix_X}{A "matrix" object with independent variables.}
+\item{x}{A "matrix" object with independent variables.}
 }
 \value{
 A "data.frame" object.

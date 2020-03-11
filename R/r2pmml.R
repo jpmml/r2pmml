@@ -52,7 +52,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 
 	jar_files = list.files(path = java_dir, pattern = "*.jar", full.names = TRUE)
 
-	return (paste(jar_files, collapse = .Platform$path.sep))
+	return(paste(jar_files, collapse = .Platform$path.sep))
 }
 
 .convert = function(rds_input, pmml_output, converter = NULL, converter_classpath = NULL, verbose = FALSE){

@@ -4,10 +4,10 @@
 \alias{as.fmap.data.frame}
 \title{Generates an XGBoost feature map based on feature data.}
 \usage{
-\method{as.fmap}{data.frame}(df_X)
+\method{as.fmap}{data.frame}(x)
 }
 \arguments{
-\item{df_X}{A "data.frame" object with independent variables.}
+\item{x}{A "data.frame" object with independent variables.}
 }
 \value{
 A "data.frame" object.

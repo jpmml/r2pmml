@@ -54,7 +54,7 @@ verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...)
 
 	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
 
-	return (x)
+	return(x)
 }
 
 #' Enhances a "train" object with verification data.
@@ -85,7 +85,7 @@ verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ..
 
 	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
 
-	return (x)
+	return(x)
 }
 
 #' Enhances an "xgb.Booster" object with verification data.
@@ -149,7 +149,7 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 
 	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
 
-	return (x)
+	return(x)
 }
 
 #' Enhances a model object with verification data.
@@ -164,5 +164,5 @@ verify.default = function(x, newdata, ...){
 .makeVerification = function(precision, zeroThreshold, active_values, target_values, output_values = NULL){
 	verification = list("precision" = precision, "zeroThreshold" = zeroThreshold, "active_values" = active_values, "target_values" = target_values, "output_values" = output_values)
 
-	return (verification)
+	return(verification)
 }

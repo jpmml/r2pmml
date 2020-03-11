@@ -154,7 +154,7 @@ decorate.svm.formula = function(x, data, ...){
 decorate.train = function(x, ...){
 	x$finalModel = decorate(x$finalModel, preProcess = NULL, ...)
 
-	return (x)
+	return(x)
 }
 
 #' Decorates a "WrappedModel" object with "invert_levels" element.
@@ -172,7 +172,7 @@ decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
 
 	x$learner.model = decorate(x$learner.model, ...)
 
-	return (x)
+	return(x)
 }
 
 #' Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.
@@ -257,11 +257,11 @@ decorate.default = function(x, preProcess = NULL, pmml_options = NULL, ...){
 		x$pmml_options = pmml_options
 	}
 
-	return (x)
+	return(x)
 }
 
 .getFactorLevels = function(data){
 	levels = lapply(data, function(x){ if(is.factor(x)) { levels(x) } else { NULL }})
 
-	return (levels[!vapply(levels, is.null, NA)])
+	return(levels[!vapply(levels, is.null, NA)])
 }

@@ -25,5 +25,5 @@ as.scorecard = function(glm, odds = 10, base_points = 500, pdo = 100){
 
 	glm$sc.conf = sc.conf
 
-	return (glm)
+	return(glm)
 }
