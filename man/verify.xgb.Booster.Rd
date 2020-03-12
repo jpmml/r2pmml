@@ -21,7 +21,7 @@
 
 \item{response_levels}{A list of category values for a categorical target field.}
 
-\item{...}{Further arguments.}
+\item{...}{Arguments to pass on to the "predict.xgb.Booster" method.}
 }
 \description{
 Enhances an "xgb.Booster" object with verification data.

@@ -96,9 +96,17 @@ verify.train = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ..
 #' @param zeroThreshold Maximal absolute error near the zero value.
 #' @param response_name The name of the target field.
 #' @param response_levels A list of category values for a categorical target field.
-#' @param ... Further arguments.
+#' @param ... Arguments to pass on to the "predict.xgb.Booster" method.
 verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6, response_name = NULL, response_levels = c(), ...){
-	active_values = as.data.frame(newdata)
+	active_values = NULL
+
+	if(is(newdata, "Matrix")){
+		active_values = as.data.frame(as.matrix(newdata))
+	} else
+
+	{
+		active_values = as.data.frame(newdata)
+	}
 
 	objective = x$params$objective
 
@@ -107,7 +115,7 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 	output_values = NULL
 
 	if(objective == "reg:linear" || objective == "reg:logistic"){
-		response = predict(x, newdata = newdata)
+		response = predict(x, newdata = newdata, ...)
 
 		response = as.data.frame(response)
 		names(response) = response_name
@@ -116,17 +124,17 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 	} else
 
 	if(objective == "binary:logistic"){
-		prob = predict(x, newdata = newdata)
+		prob = predict(x, newdata = newdata, ...)
 		prob = matrix(c(1 - prob, prob), nrow = length(prob), ncol = 2)
 
 		prob = as.data.frame(prob)
-		names(prob) = names(pred) = paste("probability(", response_levels, ")", sep = "")
+		names(prob) = paste("probability(", response_levels, ")", sep = "")
 
 		output_values = prob
 	} else
 
 	if(objective == "multi:softmax"){
-		response = predict(x, newdata = newdata)
+		response = predict(x, newdata = newdata, ...)
 
 		response = as.data.frame(response)
 		names(response) = response_name
@@ -135,7 +143,7 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 	} else
 
 	if(objective == "multi:softprob"){
-		prob = predict(x, newdata = newdata, reshape = TRUE)
+		prob = predict(x, newdata = newdata, reshape = TRUE, ...)
 
 		prob = as.data.frame(prob)
 		names(prob) = paste("probability(", response_levels, ")", sep = "")

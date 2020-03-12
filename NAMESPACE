@@ -1,3 +1,4 @@
+importFrom("methods", "is")
 importFrom("stats", "model.frame", "model.matrix", "na.omit", "predict")
 importFrom("utils", "write.table")
 
