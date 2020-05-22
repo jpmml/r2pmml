@@ -114,7 +114,7 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 
 	output_values = NULL
 
-	if(objective == "reg:linear" || objective == "reg:logistic"){
+	if(objective == "reg:linear" || objective == "req:squarederror" || objective == "reg:logistic"){
 		response = predict(x, newdata = newdata, ...)
 
 		response = as.data.frame(response)
