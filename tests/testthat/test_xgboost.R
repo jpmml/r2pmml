@@ -22,6 +22,20 @@ iris.df = iris[, 1:4]
 iris.df.fmap = as.fmap(iris.df)
 check_iris_fmap(iris.df.fmap)
 
+# Without LHS
+iris.mf = model.frame("~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width - 1", data = iris)
+iris.mf.fmap = as.fmap(iris.mf)
+check_iris_fmap(iris.mf.fmap)
+
+expect_equal(iris.df.fmap, iris.mf.fmap)
+
+# With LHS
+iris.mf = model.frame(Species ~ . - 1, data = iris)
+iris.mf.fmap = as.fmap(iris.mf)
+check_iris_fmap(iris.mf.fmap)
+
+expect_equal(iris.df.fmap, iris.mf.fmap)
+
 iris.matrix = model.matrix(Species ~ . - 1, data = iris)
 iris.matrix.fmap = as.fmap(iris.matrix)
 check_iris_fmap(iris.matrix.fmap)
@@ -51,6 +65,20 @@ check_ozone_fmap = function(fmap){
 ozone.df = Ozone[, c("V1", "V2", "V3", "V5")]
 ozone.df.fmap = as.fmap(ozone.df)
 check_ozone_fmap(ozone.df.fmap)
+
+# Without LHS
+ozone.mf = model.frame(~ V1 + V2 + V3 + V5 - 1, data = Ozone, na.action = na.pass)
+ozone.mf.fmap = as.fmap(ozone.mf)
+check_ozone_fmap(ozone.mf.fmap)
+
+expect_equal(ozone.df.fmap, ozone.mf.fmap)
+
+# With LHS
+ozone.mf = model.frame(V4 ~ V1 + V2 + V3 + V5 - 1, data = Ozone, na.action = na.pass)
+ozone.mf.fmap = as.fmap(ozone.mf)
+check_ozone_fmap(ozone.mf.fmap)
+
+expect_equal(ozone.df.fmap, ozone.mf.fmap)
 
 ozone.contrasts = lapply(Ozone[sapply(Ozone, is.factor)], contrasts, contrasts = FALSE)
 

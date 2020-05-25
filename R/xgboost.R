@@ -19,7 +19,14 @@ as.fmap.data.frame = function(x){
 	feature_names = list()
 	feature_types = list()
 
-	for(name in colnames(x)){
+	names = colnames(x)
+
+	terms = attr(x, "terms")
+	if(!is.null(terms)){
+		names = attr(terms, "term.labels")
+	}
+
+	for(name in names){
 		col = x[[name]]
 
 		if(is.factor(col)){
