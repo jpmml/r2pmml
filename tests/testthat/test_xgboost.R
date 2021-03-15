@@ -10,6 +10,7 @@ check_iris_fmap = function(fmap){
 		expect_equal(c("fmap", "data.frame"), class(fmap))
 		expect_equal(4, nrow(fmap))
 		expect_equal(c("id", "name", "type"), colnames(fmap))
+		expect_equal(c("integer", "factor", "factor"), as.character(sapply(fmap, class)))
 	})
 	test_that("FMap content", {
 		expect_equal(c(0, 1, 2, 3), fmap$id)
@@ -49,6 +50,7 @@ check_ozone_fmap = function(fmap){
 		expect_equal(c("fmap", "data.frame"), class(fmap))
 		expect_equal(51, nrow(fmap))
 		expect_equal(c("id", "name", "type"), colnames(fmap))
+		expect_equal(c("integer", "factor", "factor"), as.character(sapply(fmap, class)))
 	})
 	test_that("FMap content", {
 		row = fmap[13, ]

@@ -120,6 +120,10 @@ write.fmap = function(fmap, file){
 	fmap = data.frame("name" = unlist(feature_names), "type" = unlist(feature_types))
 	fmap = cbind("id" = seq(from = 0, to = (nrow(fmap) - 1)), fmap)
 
+	fmap$id = as.integer(fmap$id)
+	fmap$name = as.factor(fmap$name)
+	fmap$type = as.factor(fmap$type)
+
 	class(fmap) = c("fmap", class(fmap))
 	row.names(fmap) = NULL
 
