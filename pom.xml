@@ -51,7 +51,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>modify-libraries</id>
@@ -60,7 +60,7 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<tasks>
+							<target>
 								<property
 									name="guava.version"
 									value="21.0"
@@ -84,7 +84,7 @@
 									</zipfileset>
 								</jar>
 								<delete file="${project.basedir}/inst/java/guava-${guava.version}.jar"/>
-							</tasks>
+							</target>
 						</configuration>
 					</execution>
 				</executions>
@@ -113,7 +113,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.1.1</version>
+				<version>3.1.2</version>
 				<executions>
 					<execution>
 						<id>copy-library-sources</id>
@@ -134,25 +134,6 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${project.basedir}/inst/java</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.4.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>1.8</version>
-								</requireJavaVersion>
-							</rules>
 						</configuration>
 					</execution>
 				</executions>
