@@ -185,7 +185,7 @@ remove.packages("r2pmml")
 
 Up-to-date:
 
-* [Converting logistic regression models to PMML documents](https://openscoring.io/blog/2020/01/19/converting_logistic_regression_pmml/)
+* [Converting logistic regression models to PMML documents](https://openscoring.io/blog/2020/01/19/converting_logistic_regression_pmml/#r)
 * [Deploying R language models on Apache Spark ML](https://openscoring.io/blog/2019/02/09/deploying_rlang_model_sparkml/)
 
 Slightly outdated:
