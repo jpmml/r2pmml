@@ -26,7 +26,7 @@ Alternatively, installing the latest snapshot version from GitHub using the [`de
 ```R
 library("devtools")
 
-install_git("git://github.com/jpmml/r2pmml.git")
+install_github("jpmml/r2pmml")
 ```
 
 # Usage #
