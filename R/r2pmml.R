@@ -67,7 +67,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 		classpath = paste(classpath, converter_classpath, sep = .Platform$path.sep)
 	}
 
-	args = c("-cp", shQuote(classpath), "org.jpmml.rexp.Main", "--rds-input", shQuote(rds_input), "--pmml-output", shQuote(pmml_output))
+	args = c("-cp", shQuote(classpath), "com.r2pmml.Main", "--rds-input", shQuote(rds_input), "--pmml-output", shQuote(pmml_output))
 
 	if(!is.null(converter)){
 		args = c(args, "--converter", converter)
@@ -84,6 +84,6 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	} else
 
 	if(result != 0){
-		stop(c("The JPMML-R conversion application has failed (error code ", result, "). The Java executable should have printed more information about the failure into its standard output and/or standard error streams"))
+		stop(c("The R2PMML conversion application has failed (error code ", result, "). The Java executable should have printed more information about the failure into its standard output and/or standard error streams"))
 	}
 }

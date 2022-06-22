@@ -5,13 +5,12 @@ R package for converting [R](https://www.r-project.org/) models to PMML
 
 # Features #
 
-This library is a thin wrapper around the JPMML-R command-line application.
-
-For a list of supported model and transformation types, please refer to [JPMML-R features](https://github.com/jpmml/jpmml-r#features).
+This library is a thin R wrapper around the [JPMML-R](https://github.com/jpmml/jpmml-r#features) library.
 
 # Prerequisites #
 
 * Java 1.8 or newer. The Java executable must be available on system path.
+* R 3.3, 4.0 or newer.
 
 # Installation #
 
