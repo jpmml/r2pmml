@@ -35,12 +35,23 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jpmml</groupId>
-			<artifactId>jpmml-r</artifactId>
-			<version>1.4.5</version>
+			<artifactId>pmml-rexp</artifactId>
+			<version>1.5.1</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.jpmml</groupId>
-					<artifactId>pmml-agent</artifactId>
+					<artifactId>pmml-converter-testing</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-rexp-xgboost</artifactId>
+			<version>1.5.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jpmml</groupId>
+					<artifactId>pmml-converter-testing</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
