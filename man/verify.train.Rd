@@ -4,8 +4,7 @@
 \alias{verify.train}
 \title{Enhances a "train" object with verification data.}
 \usage{
-\method{verify}{train}(x, newdata, precision = 1e-13,
-  zeroThreshold = 1e-13, ...)
+\method{verify}{train}(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...)
 }
 \arguments{
 \item{x}{A "train" object.}

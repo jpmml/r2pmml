@@ -4,8 +4,14 @@
 \alias{r2pmml}
 \title{Converts an R model object to PMML.}
 \usage{
-r2pmml(x, file, converter = NULL, converter_classpath = NULL,
-  verbose = FALSE, ...)
+r2pmml(
+  x,
+  file,
+  converter = NULL,
+  converter_classpath = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{An R model object.}

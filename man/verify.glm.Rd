@@ -4,8 +4,7 @@
 \alias{verify.glm}
 \title{Enhances a "glm" object with verification data.}
 \usage{
-\method{verify}{glm}(x, newdata, precision = 1e-13,
-  zeroThreshold = 1e-13, ...)
+\method{verify}{glm}(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...)
 }
 \arguments{
 \item{x}{A "glm" object.}

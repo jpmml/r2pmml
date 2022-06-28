@@ -4,8 +4,7 @@
 \alias{decorate.default}
 \title{Decorates a model object with "preProcess" and "pmml_options" elements.}
 \usage{
-\method{decorate}{default}(x, preProcess = NULL, pmml_options = NULL,
-  ...)
+\method{decorate}{default}(x, preProcess = NULL, pmml_options = NULL, ...)
 }
 \arguments{
 \item{x}{The model object.}

@@ -4,9 +4,16 @@
 \alias{decorate.xgb.Booster}
 \title{Decorates an "xgb.Booster" object with "fmap", "schema", "ntreelimit" and "pmml_options" elements.}
 \usage{
-\method{decorate}{xgb.Booster}(x, fmap, response_name = NULL,
-  response_levels = c(), missing = NULL, ntreelimit = NULL,
-  compact = FALSE, ...)
+\method{decorate}{xgb.Booster}(
+  x,
+  fmap,
+  response_name = NULL,
+  response_levels = c(),
+  missing = NULL,
+  ntreelimit = NULL,
+  compact = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{An "xgb.Booster" object.}

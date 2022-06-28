@@ -1,5 +1,8 @@
 ^\.git$
 ^cran-comments\.md$
 ^LICENSE\.txt$
+^\.classpath$
+^\.project$
 ^pom\.xml$
+^src$
 ^target$

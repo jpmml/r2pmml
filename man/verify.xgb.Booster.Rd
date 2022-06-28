@@ -4,9 +4,15 @@
 \alias{verify.xgb.Booster}
 \title{Enhances an "xgb.Booster" object with verification data.}
 \usage{
-\method{verify}{xgb.Booster}(x, newdata, precision = 1e-06,
-  zeroThreshold = 1e-06, response_name = NULL, response_levels = c(),
-  ...)
+\method{verify}{xgb.Booster}(
+  x,
+  newdata,
+  precision = 1e-06,
+  zeroThreshold = 1e-06,
+  response_name = NULL,
+  response_levels = c(),
+  ...
+)
 }
 \arguments{
 \item{x}{An "xgb.Booster" object.}

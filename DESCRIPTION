@@ -11,7 +11,7 @@ Maintainer: Villu Ruusmann <villu.ruusmann@gmail.com>
 URL: https://github.com/jpmml/r2pmml
 LazyLoad: yes
 NeedsCompilation: no
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports:
     methods
 Suggests:
