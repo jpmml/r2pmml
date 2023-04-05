@@ -20,12 +20,12 @@ decorate.earth = function(x, data, ...){
 	decorate.default(x, ...)
 }
 
-#' Decorates an "elmNN" object with a "model" element.
+#' Decorates an "elm" object with a "model" element.
 #'
-#' @param x An "elmNN" object.
+#' @param x An "elm" object.
 #' @param data The training dataset.
 #' @param ... Arguments to pass on to the "decorate.default" function.
-decorate.elmNN = function(x, data, ...){
+decorate.elm = function(x, data, ...){
 
 	if(is.null(x$model)){
 		x$model = model.frame(x$formula, data = data)

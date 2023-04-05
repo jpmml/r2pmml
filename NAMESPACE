@@ -4,7 +4,7 @@ importFrom("utils", "write.table")
 
 S3method("decorate", "default")
 S3method("decorate", "earth")
-S3method("decorate", "elmNN")
+S3method("decorate", "elm")
 S3method("decorate", "glmnet")
 S3method("decorate", "party")
 S3method("decorate", "randomForest")

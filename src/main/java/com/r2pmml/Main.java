@@ -27,13 +27,14 @@ import java.io.OutputStream;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import org.dmg.pmml.PMML;
+import org.jpmml.converter.Application;
 import org.jpmml.model.metro.MetroJAXBUtil;
 import org.jpmml.rexp.Converter;
 import org.jpmml.rexp.ConverterFactory;
 import org.jpmml.rexp.RExp;
 import org.jpmml.rexp.RExpParser;
 
-public class Main {
+public class Main extends Application {
 
 	@Parameter (
 		names = "--converter",
@@ -56,15 +57,21 @@ public class Main {
 
 	static
 	public void main(String... args) throws Exception {
-		Main main = new Main();
+		Main application = new Main();
 
 		JCommander commander = JCommander.newBuilder()
-			.addObject(main)
+			.addObject(application)
 			.build();
 
 		commander.parse(args);
 
-		main.run();
+		try {
+			Application.setInstance(application);
+
+			application.run();
+		} finally {
+			Application.setInstance(null);
+		}
 	}
 
 	public void run() throws Exception {
