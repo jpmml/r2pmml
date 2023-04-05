@@ -195,7 +195,7 @@ Slightly outdated:
 
 R2PMML is licensed under the terms and conditions of the [GNU Affero General Public License, Version 3.0](https://www.gnu.org/licenses/agpl-3.0.html).
 
-If you would like to use R2PMML in a proprietary software project, then it is possible to enter into a licensing agreement which makes R2PMML available under the terms and conditions of the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause) instead.
+If you would like to use R2PMML in a proprietary software project, then it is possible to enter into a licensing agreement which makes R2PMML available under the terms and conditions of the [BSD 3-Clause License](https://opensource.org/license/bsd-3-clause/) instead.
 
 # Additional information #
 
