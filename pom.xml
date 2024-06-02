@@ -33,7 +33,7 @@
 	</issueManagement>
 
 	<properties>
-		<jpmml-r.version>1.5.2</jpmml-r.version>
+		<jpmml-r.version>1.5.3</jpmml-r.version>
 	</properties>
 
 	<dependencies>
@@ -84,7 +84,7 @@
 							<target>
 								<property
 									name="guava.version"
-									value="21.0"
+									value="33.0.0-jre"
 								/>
 								<jar 
 									destfile="${project.basedir}/inst/java/guava-${guava.version}-minified.jar"
