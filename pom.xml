@@ -33,7 +33,7 @@
 	</issueManagement>
 
 	<properties>
-		<jpmml-r.version>1.5.3</jpmml-r.version>
+		<jpmml-r.version>1.5.4</jpmml-r.version>
 	</properties>
 
 	<dependencies>
