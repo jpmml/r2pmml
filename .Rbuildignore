@@ -1,4 +1,5 @@
 ^\.git$
+^\.github$
 ^cran-comments\.md$
 ^LICENSE\.txt$
 ^\.classpath$
