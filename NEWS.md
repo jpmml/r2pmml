@@ -1,4 +1,4 @@
-# HEAD #
+# 0.28.0 #
 
 * Added support for the `apollo` package:
   * Multinomial logit (MNL) discrete choice models.
