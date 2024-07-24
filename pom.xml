@@ -47,6 +47,10 @@
 					<groupId>org.jpmml</groupId>
 					<artifactId>pmml-converter-testing</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
@@ -75,6 +79,13 @@
 					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- Pinned to the earliest JPMML-R compatible version in order to minimize R2PMML package size -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>15.0</version>
 		</dependency>
 
 		<dependency>
@@ -121,7 +132,7 @@
 							<target>
 								<property
 									name="guava.version"
-									value="33.2.1-jre"
+									value="15.0"
 								/>
 								<jar 
 									destfile="${project.basedir}/inst/java/guava-${guava.version}-minified.jar"
