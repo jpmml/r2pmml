@@ -48,6 +48,10 @@
 					<artifactId>pmml-converter-testing</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava</artifactId>
 				</exclusion>
