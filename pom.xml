@@ -69,16 +69,11 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Pinned to the earliest JPMML-XGBoost compatible version in order to minimize R2PMML package size -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.11.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>*</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>2.9.1</version>
 		</dependency>
 
 		<!-- Pinned to the earliest JPMML-R compatible version in order to minimize R2PMML package size -->
