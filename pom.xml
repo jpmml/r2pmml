@@ -34,6 +34,8 @@
 
 	<properties>
 		<jpmml-r.version>1.5.6</jpmml-r.version>
+		<gson.version>2.9.1</gson.version>
+		<guava.version>15.0</guava.version>
 		<project.build.outputTimestamp>2024-07-21T10:40:00Z</project.build.outputTimestamp>
 	</properties>
 
@@ -77,14 +79,14 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.9.1</version>
+			<version>${gson.version}</version>
 		</dependency>
 
 		<!-- Pinned to the earliest JPMML-R compatible version in order to minimize R2PMML package size -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>15.0</version>
+			<version>${guava.version}</version>
 		</dependency>
 
 		<dependency>
@@ -112,48 +114,6 @@
 									<version>3.6.3</version>
 								</requireMavenVersion>
 							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<id>modify-libraries</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target>
-								<property
-									name="guava.version"
-									value="15.0"
-								/>
-								<jar 
-									destfile="${project.basedir}/inst/java/guava-${guava.version}-minified.jar"
-									modificationtime="2024-01-02T00:00:00Z"
-								>
-									<zipfileset
-										src="${project.basedir}/inst/java/guava-${guava.version}.jar"
-									>
-										<exclude name="com/google/common/cache/**"/>
-										<exclude name="com/google/common/escape/**"/>
-										<exclude name="com/google/common/eventbus/**"/>
-										<exclude name="com/google/common/graph/**"/>
-										<exclude name="com/google/common/hash/**"/>
-										<exclude name="com/google/common/html/**"/>
-										<exclude name="com/google/common/net/**"/>
-										<exclude name="com/google/common/reflect/**"/>
-										<exclude name="com/google/common/util/concurrent/**"/>
-										<exclude name="com/google/common/xml/**"/>
-									</zipfileset>
-								</jar>
-								<delete file="${project.basedir}/inst/java/guava-${guava.version}.jar"/>
-							</target>
 						</configuration>
 					</execution>
 				</executions>
@@ -211,6 +171,7 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
+							<excludeArtifactIds>guava</excludeArtifactIds>
 							<outputDirectory>${project.basedir}/inst/java</outputDirectory>
 						</configuration>
 					</execution>
@@ -269,6 +230,28 @@
 								<file>DESCRIPTION</file>
 							</files>
 							<keyPrefix>DESCRIPTION.</keyPrefix>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jpmml</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<id>minify-guava</id>
+						<phase>package</phase>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+						<configuration>
+							<artifact>com.google.guava:guava</artifact>
+							<entryPoints>
+								<entryPoint>com.r2pmml.Main</entryPoint>
+								<entryPoint>META-INF/r2pmml.properties</entryPoint>
+							</entryPoints>
+							<outputFile>${project.basedir}/inst/java/guava-${guava.version}-minified.jar</outputFile>
 						</configuration>
 					</execution>
 				</executions>
