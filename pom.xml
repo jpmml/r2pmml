@@ -92,26 +92,6 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
-				<executions>
-					<execution>
-						<id>enforce-maven</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>3.6.3</version>
-								</requireMavenVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>3.4.0</version>
 				<configuration>
@@ -171,6 +151,26 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.6.3</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.4.2</version>
 				<configuration>
@@ -208,6 +208,35 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.6.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+							<finalName>${project.artifactId}-executable-${project.version}</finalName>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/r2pmml.properties</resource>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>com.r2pmml.Main</Main-Class>
+										<Implementation-Title>R2PMML command-line application</Implementation-Title>
+										<Implementation-Version>${project.version}</Implementation-Version>
+									</manifestEntries>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
 				<version>1.2.1</version>
@@ -229,7 +258,7 @@
 			<plugin>
 				<groupId>org.jpmml</groupId>
 				<artifactId>minify-maven-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.1</version>
 				<executions>
 					<execution>
 						<id>minify-guava</id>
@@ -238,12 +267,16 @@
 							<goal>minify</goal>
 						</goals>
 						<configuration>
-							<artifact>com.google.guava:guava</artifact>
+							<artifacts>
+								<artifact>com.google.guava:guava</artifact>
+							</artifacts>
 							<entryPoints>
 								<entryPoint>com.r2pmml.Main</entryPoint>
-								<entryPoint>META-INF/r2pmml.properties</entryPoint>
 							</entryPoints>
-							<outputFile>${project.basedir}/inst/java/guava-${guava.version}-minified.jar</outputFile>
+							<propertyEntryPoints>
+								<propertyEntryPoint>META-INF/r2pmml.properties</propertyEntryPoint>
+							</propertyEntryPoints>
+							<outputDir>${project.basedir}/inst/java</outputDir>
 						</configuration>
 					</execution>
 				</executions>
