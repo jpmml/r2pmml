@@ -50,7 +50,11 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 
 	java_dir = file.path(pkg.r2pmml, "java")
 
-	jar_files = list.files(path = java_dir, pattern = "*.jar", full.names = TRUE)
+	jar_files = readLines(file.path(java_dir, "classpath.txt"), encoding = "UTF-8", warn = FALSE)
+
+	jar_files = sapply(jar_files, function(x){
+		return(file.path(java_dir, x))
+	})
 
 	return(paste(jar_files, collapse = .Platform$path.sep))
 }
