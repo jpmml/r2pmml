@@ -33,7 +33,7 @@
 	</issueManagement>
 
 	<properties>
-		<jpmml-r.version>1.5.6</jpmml-r.version>
+		<jpmml-r.version>1.6.0</jpmml-r.version>
 		<gson.version>2.10.1</gson.version>
 		<guava.version>19.0</guava.version>
 		<project.build.outputTimestamp>2024-07-21T10:40:00Z</project.build.outputTimestamp>
@@ -52,6 +52,22 @@
 				<exclusion>
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-annotations</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-rexp-evaluator</artifactId>
+			<version>${jpmml-r.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-rexp-lightgbm</artifactId>
+			<version>${jpmml-r.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jpmml</groupId>
+					<artifactId>pmml-converter-testing</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
