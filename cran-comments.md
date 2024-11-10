@@ -1,5 +1,5 @@
 ## Test environments
-* GitHub Actions CI, R 4.4.1 on GNU/Linux, Mac OS and Windows
+* GitHub Actions CI, R 4.4.2 on GNU/Linux, Mac OS and Windows
 * GitHub Actions CI, R 4.3.3 on GNU/Linux
 * GitHub Actions CI, R 4.2.3 on GNU/Linux
 
