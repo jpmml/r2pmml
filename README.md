@@ -7,6 +7,12 @@ R package for converting [R](https://www.r-project.org/) models to PMML
 
 This library is a thin R wrapper around the [JPMML-R](https://github.com/jpmml/jpmml-r#features) library.
 
+# News and Updates #
+
+The current version is **0.29.0** (10 November, 2024):
+
+See the [NEWS.md](https://github.com/jpmml/r2pmml/blob/master/NEWS.md#0290) file.
+
 # Prerequisites #
 
 * Java 1.8 or newer. The Java executable must be available on system path.
