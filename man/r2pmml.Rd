@@ -7,6 +7,7 @@
 r2pmml(
   x,
   file,
+  schema = NULL,
   converter = NULL,
   converter_classpath = NULL,
   verbose = FALSE,
@@ -17,6 +18,8 @@ r2pmml(
 \item{x}{An R model object.}
 
 \item{file}{A filesystem path to the result file.}
+
+\item{schema}{The PMML schema version for the PMML document.}
 
 \item{converter}{The name of a custom JPMML-R converter class.}
 
