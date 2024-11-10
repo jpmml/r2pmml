@@ -10,8 +10,6 @@ Authors@R: person(
     given = "Villu", family = "Ruusmann",
     email = "villu.ruusmann@gmail.com",
     role = c("aut", "cre"))
-Author: Villu Ruusmann <villu.ruusmann@gmail.com>
-Maintainer: Villu Ruusmann <villu.ruusmann@gmail.com>
 URL: https://github.com/jpmml/r2pmml
 LazyLoad: yes
 NeedsCompilation: no
