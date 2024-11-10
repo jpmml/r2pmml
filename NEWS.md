@@ -1,3 +1,20 @@
+# 0.29.0 #
+
+* Added support for the version 3 serialization format.
+
+* Added `schema` parameter to the `r2pmml::r2pmml` function.
+
+* Added support for the `lightgbm` package.
+
+* Added support for `MASS::negbin` and `MASS::polr` model types.
+
+* Added support for the `pscl::hurdle` model type.
+
+* Added support for the `rms::orm` model type.
+
+* Added support for `MASS::negative.binomial` and 
+`statmod::tweedie` families in the `stats::glm` model type.
+
 # 0.28.0 #
 
 * Added support for the `apollo` package:
