@@ -23,12 +23,24 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collection;
+import java.util.List;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.google.common.collect.LinkedHashMultiset;
+import com.google.common.collect.Multiset;
+import com.sun.istack.logging.Logger;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.Version;
 import org.jpmml.converter.Application;
+import org.jpmml.converter.SAXTransformerUtil;
+import org.jpmml.converter.VersionConverter;
+import org.jpmml.converter.visitors.VersionStandardizer;
+import org.jpmml.model.MarkupException;
+import org.jpmml.model.filters.ExportFilter;
 import org.jpmml.model.metro.MetroJAXBUtil;
+import org.jpmml.model.visitors.VersionChecker;
 import org.jpmml.rexp.Converter;
 import org.jpmml.rexp.ConverterFactory;
 import org.jpmml.rexp.RExp;
@@ -53,6 +65,12 @@ public class Main extends Application {
 		required = true
 	)
 	private File outputFile = null;
+
+	@Parameter (
+		names = {"--pmml-schema", "--schema"},
+		converter = VersionConverter.class
+	)
+	private Version version = null;
 
 
 	static
@@ -106,10 +124,48 @@ public class Main extends Application {
 			if(!outputDir.exists()){
 				outputDir.mkdirs();
 			}
-		}
+		} // End if
 
-		try(OutputStream os = new FileOutputStream(this.outputFile)){
-			MetroJAXBUtil.marshalPMML(pmml, os);
+		if(this.version != null && this.version.compareTo(Version.PMML_4_4) < 0){
+			VersionStandardizer versionStandardizer = new VersionStandardizer();
+			versionStandardizer.applyTo(pmml);
+
+			VersionChecker versionChecker = new VersionChecker(this.version);
+			versionChecker.applyTo(pmml);
+
+			List<MarkupException> exceptions = versionChecker.getExceptions();
+			if(!exceptions.isEmpty()){
+				Main.logger.severe("The PMML object has " + exceptions.size() + " incompatibilities with the requested PMML schema version:");
+
+				Multiset<String> groupedMessages = LinkedHashMultiset.create();
+
+				for(MarkupException exception : exceptions){
+					groupedMessages.add(exception.getMessage());
+				}
+
+				Collection<Multiset.Entry<String>> entries = groupedMessages.entrySet();
+				for(Multiset.Entry<String> entry : entries){
+					Main.logger.warning(entry.getElement() + (entry.getCount() > 1 ? " (" + entry.getCount() + " cases)": ""));
+				}
+			}
+
+			File tempFile = File.createTempFile("r2pmml-", ".pmml");
+
+			try(OutputStream os = new FileOutputStream(tempFile)){
+				MetroJAXBUtil.marshalPMML(pmml, os);
+			}
+
+			SAXTransformerUtil.transform(tempFile, this.outputFile, new ExportFilter(this.version));
+
+			tempFile.delete();
+		} else
+
+		{
+			try(OutputStream os = new FileOutputStream(this.outputFile)){
+				MetroJAXBUtil.marshalPMML(pmml, os);
+			}
 		}
 	}
+
+	private static final Logger logger = Logger.getLogger(Main.class);
 }
