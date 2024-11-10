@@ -2,6 +2,7 @@
 #'
 #' @param x An R model object.
 #' @param file A filesystem path to the result file.
+#' @param schema The PMML schema version for the PMML document.
 #' @param converter The name of a custom JPMML-R converter class.
 #' @param converter_classpath A list of filesystem paths to library JAR files that provide and support the custom JPMML-R converter class.
 #' @param verbose A flag controlling the verbosity of the conversion process.
@@ -31,7 +32,7 @@
 #' regPmmlFile = file.path(tempdir(), "Housing-LM.pmml")
 #' r2pmml(housing.glm, regPmmlFile, converter = "org.jpmml.rexp.LMConverter")
 #' }
-r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
+r2pmml = function(x, file, schema = NULL, converter = NULL, converter_classpath = NULL, verbose = FALSE, ...){
 	x = decorate(x, ...)
 
 	tempfile = tempfile("r2pmml-", fileext = ".rds")
@@ -39,7 +40,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	main = function(){
 		saveRDS(x, tempfile, version = 2)
 
-		.convert(tempfile, file, converter, converter_classpath, verbose)
+		.convert(rds_input = tempfile, pmml_output = file, pmml_schema = schema, converter = converter, converter_classpath = converter_classpath, verbose = verbose)
 	}
 
 	tryCatch({ main() }, finally = { unlink(tempfile) })
@@ -59,7 +60,7 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	return(paste(jar_files, collapse = .Platform$path.sep))
 }
 
-.convert = function(rds_input, pmml_output, converter = NULL, converter_classpath = NULL, verbose = FALSE){
+.convert = function(rds_input, pmml_output, pmml_schema, converter, converter_classpath, verbose){
 	classpath = .classpath()
 
 	if(!is.null(converter) && !is.null(converter_classpath)){
@@ -72,6 +73,10 @@ r2pmml = function(x, file, converter = NULL, converter_classpath = NULL, verbose
 	}
 
 	args = c("-cp", shQuote(classpath), "com.r2pmml.Main", "--rds-input", shQuote(rds_input), "--pmml-output", shQuote(pmml_output))
+
+	if(!is.null(pmml_schema)){
+		args = c(args, "--pmml-schema", pmml_schema)
+	}
 
 	if(!is.null(converter)){
 		args = c(args, "--converter", converter)
