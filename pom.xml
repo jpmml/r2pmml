@@ -36,7 +36,7 @@
 		<jpmml-r.version>1.6.2</jpmml-r.version>
 		<gson.version>2.10.1</gson.version>
 		<guava.version>19.0</guava.version>
-		<project.build.outputTimestamp>2024-11-10T09:45:00Z</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2024-12-01T18:25:00Z</project.build.outputTimestamp>
 	</properties>
 
 	<dependencies>

@@ -1,3 +1,10 @@
+# 0.29.1 #
+
+* Added support for the ASCII representation of RDS data.
+
+* Fixed the version threshold for version standardization
+and/or version downgrade transformations.
+
 # 0.29.0 #
 
 * Added support for the version 3 serialization format.
