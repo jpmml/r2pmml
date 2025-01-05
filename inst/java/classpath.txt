@@ -11,10 +11,10 @@ pmml-converter-1.5.10.jar
 pmml-lightgbm-1.5.5.jar
 pmml-model-1.6.8.jar
 pmml-model-metro-1.6.8.jar
-pmml-rexp-1.6.4.jar
-pmml-rexp-evaluator-1.6.4.jar
-pmml-rexp-lightgbm-1.6.4.jar
-pmml-rexp-xgboost-1.6.4.jar
+pmml-rexp-1.6.5.jar
+pmml-rexp-evaluator-1.6.5.jar
+pmml-rexp-lightgbm-1.6.5.jar
+pmml-rexp-xgboost-1.6.5.jar
 pmml-xgboost-1.8.6.jar
 slf4j-api-1.7.36.jar
 slf4j-jdk14-1.7.36.jar
