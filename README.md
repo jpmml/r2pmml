@@ -9,9 +9,9 @@ This library is a thin R wrapper around the [JPMML-R](https://github.com/jpmml/j
 
 # News and Updates #
 
-The current version is **0.29.1** (1 December, 2024):
+The current version is **0.29.2** (5 January, 2025):
 
-See the [NEWS.md](https://github.com/jpmml/r2pmml/blob/master/NEWS.md#0291) file.
+See the [NEWS.md](https://github.com/jpmml/r2pmml/blob/master/NEWS.md#0292) file.
 
 # Prerequisites #
 
