@@ -1,3 +1,9 @@
+# 0.30.0 #
+
+* CRAN release.
+
+* Updated Java libraries.
+
 # 0.29.2 #
 
 * Added support for the `pscl::zeroinfl` model type.
@@ -15,6 +21,8 @@ and/or version downgrade transformations.
 
 # 0.29.0 #
 
+* CRAN release.
+
 * Added support for the version 3 serialization format.
 
 * Added `schema` parameter to the `r2pmml::r2pmml` function.
@@ -31,6 +39,8 @@ and/or version downgrade transformations.
 `statmod::tweedie` families in the `stats::glm` model type.
 
 # 0.28.0 #
+
+* CRAN release.
 
 * Added support for the `apollo` package:
   * Multinomial logit (MNL) discrete choice models.
