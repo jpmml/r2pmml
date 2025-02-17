@@ -1,4 +1,4 @@
-r2pmml-1.0-SNAPSHOT.jar
+r2pmml-1.1-SNAPSHOT.jar
 gson-2.10.1.jar
 guava-19.0-minified.jar
 istack-commons-runtime-4.0.1.jar
