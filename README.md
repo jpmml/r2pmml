@@ -15,7 +15,7 @@ See the [NEWS.md](https://github.com/jpmml/r2pmml/blob/master/NEWS.md#0292) file
 
 # Prerequisites #
 
-* Java 1.8 or newer. The Java executable must be available on system path.
+* Java 11 or newer. The Java executable must be available on system path.
 * R 3.3, 4.0 or newer.
 
 # Installation #
