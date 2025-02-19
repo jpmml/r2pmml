@@ -52,26 +52,30 @@ import org.jpmml.rexp.RExpParser;
 public class Main extends Application {
 
 	@Parameter (
-		names = "--converter",
-		description = "Converter class"
-	)
-	private String converter = null;
-
-	@Parameter (
 		names = {"--model-rds-input", "--rds-input"},
-		required = true
+		required = true,
+		order = 1
 	)
 	private File inputFile = null;
 
 	@Parameter (
 		names = {"--pmml-output"},
-		required = true
+		required = true,
+		order = 2
 	)
 	private File outputFile = null;
 
 	@Parameter (
+		names = "--converter",
+		description = "Converter class",
+		order = 3
+	)
+	private String converter = null;
+
+	@Parameter (
 		names = {"--pmml-schema", "--schema"},
-		converter = VersionConverter.class
+		converter = VersionConverter.class,
+		order = 4
 	)
 	private Version version = null;
 
