@@ -43,13 +43,12 @@ library("r2pmml")
 data(iris)
 iris_X = iris[, -ncol(iris)]
 iris_y = iris[, ncol(iris)]
-# Convert from factor to integer[0, num_class]
-iris_y = (as.integer(iris_y) - 1)
-iris.matrix = model.matrix(~ . - 1, data = iris_X)
-iris.DMatrix = xgb.DMatrix(iris.matrix, label = iris_y)
-iris.fmap = as.fmap(iris.matrix)
-iris.xgboost = xgboost(data = iris.DMatrix,
-    objective = "multi:softprob", num_class = 3, nrounds = 11)
+iris.fmap = as.fmap(iris_X)
+iris.xgboost = xgboost(
+  x = iris_X, y = iris_y,
+  objective = "multi:softprob",
+  nrounds = 11
+)
 iris.xgboost = decorate(iris.xgboost, iris.fmap, 
     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
 pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
