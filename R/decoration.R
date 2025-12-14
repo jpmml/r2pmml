@@ -209,6 +209,14 @@ decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
 #' }
 decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels = c(), missing = NULL, ntreelimit = NULL, compact = FALSE, ...){
 
+	# Transform XGBoost 3.X object to XGBoost 1.X/2.X-style object
+	if(is.list(x) && "ptr" %in% names(x) && typeof(x$ptr) == "externalptr"){
+		raw_bytes = xgboost::xgb.save.raw(x)
+
+		x = list(raw = raw_bytes)
+		class(x) = "xgb3.Booster"
+	}
+
 	if(is.null(x$fmap)){
 		x$fmap = fmap
 	}
