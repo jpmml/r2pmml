@@ -213,8 +213,14 @@ decorate.xgb.Booster = function(x, fmap, response_name = NULL, response_levels =
 	if(is.list(x) && "ptr" %in% names(x) && typeof(x$ptr) == "externalptr"){
 		raw_bytes = xgboost::xgb.save.raw(x)
 
+		verification = attr(x, "verification")
+
 		x = list(raw = raw_bytes)
 		class(x) = "xgb3.Booster"
+
+		if(!is.null(verification)){
+			x$verification = verification
+		}
 	}
 
 	if(is.null(x$fmap)){

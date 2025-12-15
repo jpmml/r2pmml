@@ -106,15 +106,21 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 
 	{
 		active_values = as.data.frame(newdata)
-	}
+	} # End if
 
-	objective = x$params$objective
+	if(is.list(x) && "ptr" %in% names(x)){
+		objective = attr(x, "params")[["objective"]]
+	} else
+
+	{
+		objective = x$params$objective
+	}
 
 	target_values = NULL
 
 	output_values = NULL
 
-	if(objective == "reg:linear" || objective == "req:squarederror" || objective == "reg:squaredlogerror" || objective == "reg:logistic"){
+	if(objective == "reg:linear" || objective == "reg:squarederror" || objective == "reg:squaredlogerror" || objective == "reg:logistic"){
 		response = predict(x, newdata = newdata, ...)
 
 		response = as.data.frame(response)
@@ -155,7 +161,17 @@ verify.xgb.Booster = function(x, newdata, precision = 1e-6, zeroThreshold = 1e-6
 		stop(paste("Verification is not implemented for", objective, "objective function", sep = " "))
 	}
 
-	x$verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
+	verification = .makeVerification(precision, zeroThreshold, active_values, target_values, output_values)
+
+	if(is.list(x) && "ptr" %in% names(x)){
+		# Assign as attribute
+		attr(x, "verification") = verification
+	} else
+
+	{
+		# Assign as element
+		x$verification = verification
+	}
 
 	return(x)
 }
