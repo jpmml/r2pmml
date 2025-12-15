@@ -39,7 +39,7 @@
 	</issueManagement>
 
 	<properties>
-		<jpmml-r.version>1.7.5</jpmml-r.version>
+		<jpmml-r.version>1.7.6</jpmml-r.version>
 		<gson.version>2.10.1</gson.version>
 		<guava.version>19.0</guava.version>
 		<project.build.outputTimestamp>2025-01-25T07:35:00Z</project.build.outputTimestamp>
