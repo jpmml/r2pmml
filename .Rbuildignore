@@ -1,9 +1,11 @@
 ^\.git$
 ^\.github$
+^bin$
 ^cran-comments\.md$
 ^LICENSE\.txt$
 ^\.classpath$
 ^\.project$
 ^pom\.xml$
+^README\.md$
 ^src$
 ^target$
