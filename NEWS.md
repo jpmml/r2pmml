@@ -1,3 +1,13 @@
+# 0.30.1 #
+
+* CRAN release
+
+* Changed Java system requirement from `>= 8` to `>= 11`.
+
+* Added support for `xgboost` package versions `>= 3`.
+
+* Updated Java libraries.
+
 # 0.30.0 #
 
 * CRAN release.
