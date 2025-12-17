@@ -52,8 +52,10 @@ iris.xgboost = xgboost(
 iris.xgboost = decorate(iris.xgboost, iris.fmap, 
     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
 pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
-r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
+# Please uncomment the next line
+#r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
 compactPmmlFile = file.path(tempdir(), "Iris-XGBoost-compact.pmml")
-r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
+# Please uncomment the next line
+#r2pmml(iris.xgboost, compactPmmlFile, compact = TRUE)
 }
 }

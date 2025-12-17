@@ -23,7 +23,8 @@ verify = function(x, newdata, ...){
 #' data(BostonHousing)
 #' housing.glm = glm(medv ~ ., data = BostonHousing, family = "gaussian")
 #' housing.glm = verify(housing.glm, newdata = BostonHousing[sample(nrow(BostonHousing), 10), ])
-#' r2pmml(housing.glm, file.path(tempdir(), "Housing-GLM-verified.pmml"))
+#' # Please uncomment the next line
+#' #r2pmml(housing.glm, file.path(tempdir(), "Housing-GLM-verified.pmml"))
 #' }
 verify.glm = function(x, newdata, precision = 1e-13, zeroThreshold = 1e-13, ...){
 	active_values = newdata
