@@ -3,9 +3,9 @@ Version: 0.31.0
 Date: 2025-12-15
 Type: Package
 License: AGPL-3
-Title: Convert R Models to PMML
-Description: R wrapper for the JPMML-R library <https://github.com/jpmml/jpmml-r>,
-    which converts R models to Predictive Model Markup Language (PMML).
+Title: Convert R Models to 'PMML'
+Description: R wrapper for the 'JPMML-R' library <https://github.com/jpmml/jpmml-r>,
+    which converts R models to Predictive Model Markup Language ('PMML').
 Authors@R: person(
     given = "Villu", family = "Ruusmann",
     email = "villu.ruusmann@gmail.com",

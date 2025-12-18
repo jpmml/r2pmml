@@ -203,8 +203,9 @@ decorate.WrappedModel = function(x, invert_levels = FALSE, ...){
 #'   objective = "multi:softprob",
 #'   nrounds = 11
 #' )
-#' iris.xgboost = decorate(iris.xgboost, iris.fmap, 
-#'     response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
+#' # Please uncomment the next two lines
+#' #iris.xgboost = decorate(iris.xgboost, iris.fmap, 
+#' #    response_name = "Species", response_levels = c("setosa", "versicolor", "virginica"))
 #' pmmlFile = file.path(tempdir(), "Iris-XGBoost.pmml")
 #' # Please uncomment the next line
 #' #r2pmml(iris.xgboost, pmmlFile, compact = FALSE)
